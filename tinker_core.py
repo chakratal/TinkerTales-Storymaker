@@ -11,6 +11,8 @@ load_dotenv()
 openai_client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 elevenlabs_client = ElevenLabs(api_key=st.secrets["ELEVEN_API_KEY"])
 
+print("ELEVEN_API_KEY exists:", "ELEVEN_API_KEY" in st.secrets)
+print("OpenAI key starts with:", st.secrets["OPENAI_API_KEY"][:10])
 
 def narrate_story(story_text, filename="story.mp3", voice="Amelia"):
     audio = elevenlabs_client.text_to_speech.convert(

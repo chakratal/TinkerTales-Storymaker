@@ -1,3 +1,5 @@
+import streamlit as st
+
 import os
 from openai import OpenAI
 from elevenlabs import ElevenLabs, VoiceSettings
@@ -6,8 +8,8 @@ from elevenlabs import ElevenLabs, VoiceSettings
 from dotenv import load_dotenv
 load_dotenv()
 
-openai_client = OpenAI()
-elevenlabs_client = ElevenLabs(api_key=os.getenv("ELEVEN_API_KEY"))
+openai_client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+elevenlabs_client = ElevenLabs(api_key=st.secrets["ELEVEN_API_KEY"])
 
 
 def narrate_story(story_text, filename="story.mp3", voice="Amelia"):

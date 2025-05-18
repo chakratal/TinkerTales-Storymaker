@@ -2,14 +2,14 @@ import streamlit as st
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
-from elevenlabs import ElevenLabs, VoiceSettings
+from elevenlabs.client import ElevenLabs
+from elevenlabs.types import VoiceSettings
 
 from tinker_core import generate_story, narrate_story, select_voice  # we’ll separate logic into this file later
 
 # Load API keys
 load_dotenv()
-openai_client = OpenAI()
-elevenlabs_client = ElevenLabs(api_key=os.getenv("ELEVEN_API_KEY"))
+elevenlabs_client = ElevenLabs(api_key=st.secrets["ELEVEN_API_KEY"])
 
 st.set_page_config(page_title="TinkerTales Storymaker", page_icon="✨")
 
@@ -35,6 +35,6 @@ if st.button("Generate Story"):
 if "story" in st.session_state and st.button("🎧 Generate Narration"):
     with st.spinner("Narrating your story..."):
         filename = f"{name.lower()}_{theme.lower().replace(' ', '_')}.mp3"
-        narrate_story(st.session_state["story"], filename=filename, voice=st.session_state["voice"])
+        narrate_story(st.session_state["story"], filename=filename, voice=st.session_state["voice"], client=elevenlabs_client)
         with open(filename, "rb") as f:
             st.download_button("Download Narrated Story", f, file_name=filename, mime="audio/mpeg")

@@ -1,36 +1,35 @@
 import streamlit as st
-
 import os
-from openai import OpenAI
-from elevenlabs import ElevenLabs, VoiceSettings
-
-# Load environment
 from dotenv import load_dotenv
+from openai import OpenAI
+from elevenlabs.client import ElevenLabs
+from elevenlabs.types import VoiceSettings
+
+# Load environment variables
 load_dotenv()
 
+# Initialize OpenAI client
 openai_client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
-elevenlabs_client = ElevenLabs(api_key=st.secrets["ELEVEN_API_KEY"])
+
+# Initialize ElevenLabs client
+ELEVEN_API_KEY = st.secrets["ELEVEN_API_KEY"]
+elevenlabs_client = ElevenLabs(api_key=ELEVEN_API_KEY)
 
 print("ELEVEN_API_KEY exists:", "ELEVEN_API_KEY" in st.secrets)
 print("OpenAI key starts with:", st.secrets["OPENAI_API_KEY"][:10])
 
-def narrate_story(story_text, filename="story.mp3", voice="Amelia"):
-    audio = elevenlabs_client.text_to_speech.convert(
-        voice=voice,
-        model="eleven_monolingual_v1",
+def narrate_story(story_text, filename="story.mp3", voice="Amelia", client=elevenlabs_client):
+    audio = client.generate(
         text=story_text,
+        model="eleven_monolingual_v1",
+        voice=voice,
         voice_settings=VoiceSettings(stability=0.7, similarity_boost=0.8)
     )
     with open(filename, "wb") as f:
         f.write(audio)
     print(f"🎧 Narration saved as {filename}")
 
-
 def select_voice(theme, age_range):
-    """
-    Returns the best ElevenLabs voice based on story theme and age range.
-    Legacy voices are only used as optional extras.
-    """
     if theme == "Bedtime":
         return "Charlotte"
     elif theme == "Fairy Tale":
@@ -56,8 +55,7 @@ def select_voice(theme, age_range):
         return "Jessica"
     else:
         return "Amelia"
-    
-    # Style mapping for themes (except Comedy and Adventure)
+
 style_by_theme = {
     "Fairy Tale": "in a whimsical, magical style like J.K. Rowling",
     "Bedtime": "in a gentle, soothing voice like Margaret Wise Brown",
@@ -68,7 +66,6 @@ style_by_theme = {
     "Spooky": "in a slightly eerie but fun tone like R.L. Stine"
 }
 
-# Styles for Comedy and Adventure based on age range
 comedy_style_by_age = {
     "3-5": "in a silly, rhythmic style like Sandra Boynton",
     "6-8": "in a wacky, outrageous style like Dav Pilkey (Dog Man)",
@@ -93,7 +90,7 @@ def generate_story(character_name, age_range, theme, custom_detail=None):
         style = style_by_theme.get(theme, "")
 
     prompt = f"""
-    Write a short story for a child aged {age_range}. The story should include a character named {character_name} and follow the theme "{theme}".
+    Write a short story for a child aged {age_range}. The story should include a character named {character_name} and follow the theme \"{theme}\".
     {f"Include this detail: {custom_detail}." if custom_detail else ""}
     Write the story {style}.
     Include a creative, fun story title at the top.

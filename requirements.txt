@@ -1,4 +1,4 @@
-openai>=1.0.0
-elevenlabs>=1.0.4
+openai==0.28.1
+elevenlabs==0.2.27
 streamlit
 python-dotenv

@@ -10,6 +10,7 @@ load_dotenv()
 
 # Initialize OpenAI client
 openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+print("Loaded OPENAI key (start):", st.secrets["OPENAI_API_KEY"][:10])
 
 # Initialize ElevenLabs client
 ELEVEN_API_KEY = st.secrets["ELEVEN_API_KEY"]

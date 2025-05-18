@@ -95,9 +95,10 @@ def generate_story(character_name, age_range, theme, custom_detail=None):
 
 def generate_image(prompt):
     response = openai.Image.create(
+        model="dall-e-3",
         prompt=prompt,
         n=1,
-        size="512x512"
+        size="1024x1024",  # DALL·E 3 only supports this size
+        response_format="url"
     )
-    image_url = response["data"][0]["url"]
-    return image_url
+    return response["data"][0]["url"]

@@ -18,7 +18,10 @@ def narrate_story(story_text, filename="story.mp3", voice="Amelia"):
         text=story_text,
         voice=voice,
         model="eleven_monolingual_v1",
-        voice_settings=VoiceSettings(stability=0.7, similarity_boost=0.8)
+        voice_settings=VoiceSettings(
+            stability=0.7,
+            similarity_boost=0.8
+        )
     )
     with open(filename, "wb") as f:
         f.write(audio)

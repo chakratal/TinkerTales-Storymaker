@@ -18,7 +18,31 @@ def narrate_story(story_text, filename="story.mp3", voice="Amelia"):
     print(f"🎧 Narration saved as {filename}")
 
 def select_voice(theme, age_range):
-    return "Rachel"
+    if theme == "Bedtime":
+        return "Rachel (Legacy)"
+    elif theme == "Fairy Tale":
+        return "Domi (Legacy)"
+    elif theme == "Spooky":
+        return "Paul (Legacy)"
+    elif theme == "Comedy":
+        if age_range == "6-8":
+            return "Domi (Legacy)"
+        elif age_range == "9-11":
+            return "Clyde (Legacy)"
+        else:
+            return "Domi (Legacy)"
+    elif theme == "Fantasy":
+        return "Clyde (Legacy)"
+    elif theme == "Adventure":
+        return "Aria"
+    elif theme == "Mystery":
+        return "Paul (Legacy)"
+    elif theme == "Outer Space":
+        return "Rachel (Legacy)"
+    elif theme == "Science Fiction":
+        return "Drew (Legacy)"
+    else:
+        return "Rachel (Legacy)"
 
 style_by_theme = {
     "Fairy Tale": "in a whimsical, magical style like J.K. Rowling",

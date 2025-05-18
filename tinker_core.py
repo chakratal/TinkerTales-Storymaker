@@ -1,12 +1,12 @@
 from elevenlabs import generate, set_api_key, VoiceSettings
-import openai
+from openai import OpenAI
 from dotenv import load_dotenv
 import os
 
 # Load environment and API keys
 load_dotenv()
 set_api_key(os.getenv("ELEVEN_API_KEY"))
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def narrate_story(story_text, filename="story.mp3", voice="Amelia"):
     audio = generate(
@@ -88,7 +88,7 @@ def generate_story(character_name, age_range, theme, custom_detail=None):
     Make the story around 500-650 words long. Keep it age-appropriate and imaginative.
     """
 
-    response = openai.ChatCompletion.create(
+    response = openai_client.chat.completions.create(
         model="gpt-4o",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.8,

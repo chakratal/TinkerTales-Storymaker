@@ -1,15 +1,14 @@
 import streamlit as st
 import os
 from dotenv import load_dotenv
-from openai import OpenAI
 from elevenlabs import generate, set_api_key, VoiceSettings
+import openai
 
 from tinker_core import generate_story, narrate_story, select_voice
 
-# Load secrets
-load_dotenv()
+# Use Streamlit secrets
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 set_api_key(st.secrets["ELEVEN_API_KEY"])
-openai_client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 st.set_page_config(page_title="TinkerTales Storymaker", page_icon="✨")
 st.title("📖✨ TinkerTales Storymaker")

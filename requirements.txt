@@ -1,4 +1,4 @@
-openai==1.79.0
+openai==0.28.1
 elevenlabs==0.2.27
 streamlit==1.33.0
 python-dotenv==1.0.1

@@ -1,22 +1,21 @@
 import streamlit as st
 import os
 from dotenv import load_dotenv
-from elevenlabs import generate, set_api_key, VoiceSettings
-import openai
 
-# ✅ Set config first
+# ✅ Set config before anything else
 st.set_page_config(page_title="TinkerTales Storymaker", page_icon="✨")
 
+# ✅ Set environment variables for OpenAI and ElevenLabs
+os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+os.environ["ELEVEN_API_KEY"] = st.secrets["ELEVEN_API_KEY"]
+
+# ✅ Now import your logic
 from tinker_core import generate_story, narrate_story, select_voice
 
-# ✅ Load secrets
-openai.api_key = st.secrets["OPENAI_API_KEY"]
-set_api_key(st.secrets["ELEVEN_API_KEY"])
-
-# ✅ Optional debug check
+# Optional debug
 st.write("API key starts with:", st.secrets["OPENAI_API_KEY"][:5])
 
-# ✅ Main interface
+# UI
 st.title("📖✨ TinkerTales Storymaker")
 st.caption("Where imagination meets AI and comes to life.")
 
@@ -29,6 +28,7 @@ theme = st.selectbox("Theme", [
 ])
 custom_detail = st.text_area("Optional detail", placeholder="e.g., Ani wears a shirt with stars...")
 
+# Generate story
 if st.button("Generate Story"):
     with st.spinner("Writing your story..."):
         story = generate_story(name, age, theme, custom_detail)
@@ -36,6 +36,7 @@ if st.button("Generate Story"):
         st.session_state["voice"] = select_voice(theme, age)
         st.text_area("Your Story", story, height=350)
 
+# Generate narration
 if "story" in st.session_state and st.button("🎧 Generate Narration"):
     with st.spinner("Narrating your story..."):
         filename = f"{name.lower()}_{theme.lower().replace(' ', '_')}.mp3"

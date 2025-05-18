@@ -1,17 +1,24 @@
-import openai
-from elevenlabs import generate, set_api_key, VoiceSettings
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
+from openai import OpenAI
+from elevenlabs import ElevenLabs, Voice, Audio, save, VoiceSettings
 
-# Load .env locally or rely on Streamlit secrets in app
+# Load environment variables (.env or Streamlit secrets should have been set before import)
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
-set_api_key(os.getenv("ELEVEN_API_KEY"))
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+os.environ["ELEVEN_API_KEY"] = os.getenv("ELEVEN_API_KEY")
 
+# Initialize OpenAI client
+client = OpenAI()
+
+# Initialize ElevenLabs client
+eleven_client = ElevenLabs()
+
+# --------- Narration ---------
 def narrate_story(story_text, filename="story.mp3", voice="Amelia"):
-    audio = generate(
+    audio: Audio = eleven_client.generate(
         text=story_text,
-        voice=voice,
+        voice=Voice(name=voice),
         model="eleven_monolingual_v1",
         voice_settings=VoiceSettings(stability=0.7, similarity_boost=0.8)
     )
@@ -19,6 +26,7 @@ def narrate_story(story_text, filename="story.mp3", voice="Amelia"):
         f.write(audio)
     print(f"🎧 Narration saved as {filename}")
 
+# --------- Voice Selection ---------
 def select_voice(theme, age_range):
     if theme == "Bedtime":
         return "Charlotte"
@@ -46,6 +54,7 @@ def select_voice(theme, age_range):
     else:
         return "Amelia"
 
+# --------- Styles ---------
 style_by_theme = {
     "Fairy Tale": "in a whimsical, magical style like J.K. Rowling",
     "Bedtime": "in a gentle, soothing voice like Margaret Wise Brown",
@@ -68,6 +77,7 @@ adventure_style_by_age = {
     "9-11": "in a fast-paced, witty tone like Rick Riordan"
 }
 
+# --------- Story Generation ---------
 def generate_story(character_name, age_range, theme, custom_detail=None):
     if theme == "Comedy":
         style = comedy_style_by_age.get(age_range, "")
@@ -85,10 +95,11 @@ def generate_story(character_name, age_range, theme, custom_detail=None):
     Make the story around 500-650 words long. Keep it age-appropriate and imaginative.
     """
 
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.8,
         max_tokens=1000
     )
-    return response["choices"][0]["message"]["content"]
+
+    return response.choices[0].message.content.strip()

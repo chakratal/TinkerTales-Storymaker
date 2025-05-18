@@ -8,10 +8,10 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 set_api_key(os.getenv("ELEVEN_API_KEY"))
 
-def narrate_story(story_text, filename="story.mp3", voice="Amelia"):
+def narrate_story(story_text, filename="story.mp3", voice_id="EXAVITQu4vr4xnSDxMaL"):
     audio = generate(
         text=story_text,
-        voice=voice
+        voice=voice_id  # <- uses ID now
     )
     with open(filename, "wb") as f:
         f.write(audio)
@@ -19,30 +19,30 @@ def narrate_story(story_text, filename="story.mp3", voice="Amelia"):
 
 def select_voice(theme, age_range):
     if theme == "Bedtime":
-        return "Rachel (Legacy)"
+        return "EXAVITQu4vr4xnSDxMaL"  # Sarah (formerly Rachel Legacy)
     elif theme == "Fairy Tale":
-        return "Domi (Legacy)"
+        return "ZF6FPAbjXT4488VcRRnw"  # Amelia
     elif theme == "Spooky":
-        return "Paul (Legacy)"
+        return "onwK4e9ZLuTAKqWW03F9"  # Daniel
     elif theme == "Comedy":
-        if age_range == "6-8":
-            return "Domi (Legacy)"
+        if age_range == "3-5":
+            return "pFZP5JQG7iQjIQuC4Bku"  # Lily
+        elif age_range == "6-8":
+            return "cgSgspJ2msm6clMCkdW9"  # Jessica
         elif age_range == "9-11":
-            return "Clyde (Legacy)"
-        else:
-            return "Domi (Legacy)"
+            return "j9jfwdrw7BRfcR43Qohk"  # Frederick Surrey
     elif theme == "Fantasy":
-        return "Clyde (Legacy)"
+        return "j9jfwdrw7BRfcR43Qohk"  # Frederick Surrey
     elif theme == "Adventure":
-        return "Aria"
+        return "9BWtsMINqrJLrRacOk9x"  # Aria
     elif theme == "Mystery":
-        return "Paul (Legacy)"
+        return "NFG5qt843uXKj4pFvR7C"  # Adam Stone - late night radio
     elif theme == "Outer Space":
-        return "Rachel (Legacy)"
+        return "XrExE9yKIg1WjnnlVkGX"  # Matilda
     elif theme == "Science Fiction":
-        return "Drew (Legacy)"
+        return "IKne3meq5aSn9XLyUdCD"  # Charlie
     else:
-        return "Rachel (Legacy)"
+        return "EXAVITQu4vr4xnSDxMaL"  # Sarah (default fallback)
 
 style_by_theme = {
     "Fairy Tale": "in a whimsical, magical style like J.K. Rowling",

@@ -20,11 +20,15 @@ from tinker_core import generate_story, narrate_story, select_voice
 st.title("📖✨ TinkerTales Storymaker")
 st.caption("Where imagination meets AI and comes to life.")
 
-# ✅ Load and display logo with padding
+# 👆 Add space above the image
+st.markdown("&nbsp;", unsafe_allow_html=True)
+
+# ✅ Load and display logo
 logo_image = Image.open("assets/logo.png")
-st.markdown("<div style='padding: 20px; padding-bottom: 10px;'>", unsafe_allow_html=True)
 st.image(logo_image, use_container_width=True)
-st.markdown("</div>", unsafe_allow_html=True)
+
+# 👇 Space below the image
+st.markdown("&nbsp;", unsafe_allow_html=True)
 
 # 👇 This helps force some visual space after the image
 st.markdown("&nbsp;", unsafe_allow_html=True)

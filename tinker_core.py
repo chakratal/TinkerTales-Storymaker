@@ -1,12 +1,17 @@
-from elevenlabs import generate, set_api_key, VoiceSettings
+import streamlit as st
 from openai import OpenAI
+from elevenlabs import generate, set_api_key, VoiceSettings
 from dotenv import load_dotenv
 import os
 
 # Load environment and API keys
-load_dotenv()
-set_api_key(os.getenv("ELEVEN_API_KEY"))
-openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+load_dotenv()  # optional, but safe to keep
+
+# ElevenLabs from Streamlit secrets
+set_api_key(st.secrets["ELEVEN_API_KEY"])
+
+# ✅ THIS IS THE KEY LINE
+openai_client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 def narrate_story(story_text, filename="story.mp3", voice="Amelia"):
     audio = generate(

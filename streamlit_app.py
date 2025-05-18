@@ -25,7 +25,7 @@ theme = st.selectbox("Theme", [
     "Fantasy", "Fairy Tale", "Bedtime", "Comedy", "Adventure",
     "Spooky", "Mystery", "Outer Space", "Science Fiction"
 ])
-custom_detail = st.text_area("Optional detail", placeholder="e.g., Ani wears a shirt with stars...")
+custom_detail = st.text_area("Add any special details you'd like to include here", placeholder="e.g., Ani wears a shirt with stars...")
 
 # Generate story
 if st.button("Generate Story"):
@@ -33,7 +33,10 @@ if st.button("Generate Story"):
         story = generate_story(name, age, theme, custom_detail)
         st.session_state["story"] = story
         st.session_state["voice"] = select_voice(theme, age)
-        st.text_area("Your Story", story, height=350)
+
+# ✅ Always show the story if it exists (even after rerun)
+if "story" in st.session_state:
+    st.text_area("Your Story", st.session_state["story"], height=350)
 
 # Generate narration
 if "story" in st.session_state and st.button("🎧 Generate Narration"):

@@ -9,6 +9,8 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 set_api_key(os.getenv("ELEVEN_API_KEY"))
 
 def narrate_story(story_text, filename="story.mp3", voice_id="EXAVITQu4vr4xnSDxMaL"):
+    print(f"🔊 Narrating with voice ID: {voice_id}")
+    print(f"Story length: {len(story_text)} characters")
     audio = generate(
         text=story_text,
         voice=voice_id  # <- uses ID now

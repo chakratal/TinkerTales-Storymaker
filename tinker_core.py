@@ -9,7 +9,7 @@ from elevenlabs.types import VoiceSettings
 load_dotenv()
 
 # Initialize OpenAI client
-openai_client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Initialize ElevenLabs client
 ELEVEN_API_KEY = st.secrets["ELEVEN_API_KEY"]

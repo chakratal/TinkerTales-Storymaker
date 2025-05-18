@@ -175,3 +175,6 @@ cython_debug/
 
 # TinkerTales output
 narrated_stories/
+
+# TinkerTales dev scripts
+list_voices.py

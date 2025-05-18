@@ -14,7 +14,7 @@ openai.api_key = st.secrets["OPENAI_API_KEY"]
 set_api_key(st.secrets["ELEVEN_API_KEY"])
 
 # ✅ Now import core logic
-from tinker_core import generate_story, narrate_story, select_voice
+from tinker_core import generate_story, narrate_story, select_voice, generate_image
 
 # ✅ UI
 st.title("📖✨ TinkerTales Storymaker")

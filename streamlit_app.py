@@ -10,6 +10,8 @@ from tinker_core import generate_story, narrate_story, select_voice
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 set_api_key(st.secrets["ELEVEN_API_KEY"])
 
+st.write("API key starts with:", st.secrets["OPENAI_API_KEY"][:5])
+
 st.set_page_config(page_title="TinkerTales Storymaker", page_icon="✨")
 st.title("📖✨ TinkerTales Storymaker")
 st.caption("Where imagination meets AI and comes to life.")

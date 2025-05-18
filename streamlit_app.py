@@ -30,8 +30,7 @@ st.image(logo_image, use_container_width=True)
 # 👇 Space below the image
 st.markdown("&nbsp;", unsafe_allow_html=True)
 
-# 👇 This helps force some visual space after the image
-st.markdown("&nbsp;", unsafe_allow_html=True)
+st.markdown("## ✏️ Add Your Details and Make Your Story Come to Life!")
 
 # Inputs
 name = st.text_input("Character name", value="Ani")

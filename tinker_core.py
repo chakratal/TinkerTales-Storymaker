@@ -92,3 +92,12 @@ def generate_story(character_name, age_range, theme, custom_detail=None):
         max_tokens=1000
     )
     return response["choices"][0]["message"]["content"]
+
+def generate_image(prompt):
+    response = openai.Image.create(
+        prompt=prompt,
+        n=1,
+        size="512x512"
+    )
+    image_url = response["data"][0]["url"]
+    return image_url

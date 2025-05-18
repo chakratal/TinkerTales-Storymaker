@@ -30,7 +30,7 @@ st.image(logo_image, use_container_width=True)
 # 👇 Space below the image
 st.markdown("&nbsp;", unsafe_allow_html=True)
 
-st.markdown("## ✏️ Add Your Details and Make Your Story Come to Life!")
+st.markdown("### ✏️ Story Ideas: Watch Your Brainstorm Come to Life!")
 
 # Inputs
 name = st.text_input("Character name", value="Ani")
@@ -51,6 +51,13 @@ if st.button("Generate Story"):
 # ✅ Always show the story if it exists (even after rerun)
 if "story" in st.session_state:
     st.text_area("Your Story", st.session_state["story"], height=350)
+
+    # Generate and display image
+    if st.button("🖼️ Generate Illustration"):
+        with st.spinner("Drawing your story..."):
+            image_prompt = f"A whimsical illustration of {name} in a {theme} story for children"
+            image_url = generate_image(image_prompt)
+            st.image(image_url, caption="AI-generated illustration", use_column_width=True)
 
 # Generate narration
 if "story" in st.session_state and st.button("🎧 Generate Narration"):

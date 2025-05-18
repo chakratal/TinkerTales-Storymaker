@@ -20,9 +20,11 @@ from tinker_core import generate_story, narrate_story, select_voice
 st.title("📖✨ TinkerTales Storymaker")
 st.caption("Where imagination meets AI and comes to life.")
 
-# ✅ Load and display banner image
+# ✅ Load and display logo with padding
 logo_image = Image.open("assets/logo.png")
-st.image(logo_image, width=300)
+st.markdown("<div style='padding-top: 20px; padding-bottom: 20px;'>", unsafe_allow_html=True)
+st.image(logo_image, use_container_width=True)
+st.markdown("</div>", unsafe_allow_html=True)
 
 # Inputs
 name = st.text_input("Character name", value="Ani")

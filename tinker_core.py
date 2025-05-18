@@ -1,29 +1,18 @@
-import streamlit as st
-import os
-from dotenv import load_dotenv
+from elevenlabs import generate, set_api_key, VoiceSettings
 from openai import OpenAI
-from elevenlabs.client import ElevenLabs
-from elevenlabs.types import VoiceSettings
+from dotenv import load_dotenv
+import os
 
-# Load environment variables
+# Load environment and API keys
 load_dotenv()
-
-# Initialize OpenAI client
+set_api_key(os.getenv("ELEVEN_API_KEY"))
 openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-print("Loaded OPENAI key (start):", st.secrets["OPENAI_API_KEY"][:10])
 
-# Initialize ElevenLabs client
-ELEVEN_API_KEY = st.secrets["ELEVEN_API_KEY"]
-elevenlabs_client = ElevenLabs(api_key=ELEVEN_API_KEY)
-
-print("ELEVEN_API_KEY exists:", "ELEVEN_API_KEY" in st.secrets)
-print("OpenAI key starts with:", st.secrets["OPENAI_API_KEY"][:10])
-
-def narrate_story(story_text, filename="story.mp3", voice="Amelia", client=elevenlabs_client):
-    audio = client.generate(
+def narrate_story(story_text, filename="story.mp3", voice="Amelia"):
+    audio = generate(
         text=story_text,
-        model="eleven_monolingual_v1",
         voice=voice,
+        model="eleven_monolingual_v1",
         voice_settings=VoiceSettings(stability=0.7, similarity_boost=0.8)
     )
     with open(filename, "wb") as f:
@@ -91,7 +80,7 @@ def generate_story(character_name, age_range, theme, custom_detail=None):
         style = style_by_theme.get(theme, "")
 
     prompt = f"""
-    Write a short story for a child aged {age_range}. The story should include a character named {character_name} and follow the theme \"{theme}\".
+    Write a short story for a child aged {age_range}. The story should include a character named {character_name} and follow the theme "{theme}".
     {f"Include this detail: {custom_detail}." if custom_detail else ""}
     Write the story {style}.
     Include a creative, fun story title at the top.

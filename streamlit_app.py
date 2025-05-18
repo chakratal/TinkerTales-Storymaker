@@ -9,10 +9,6 @@ st.set_page_config(page_title="TinkerTales Storymaker", page_icon="✨")
 
 from PIL import Image
 
-# ✅ Load and display top banner/logo
-logo_image = Image.open("assets/logo.png")
-st.image(logo_image, use_column_width=True)
-
 # ✅ Load secrets into environment
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 set_api_key(st.secrets["ELEVEN_API_KEY"])
@@ -23,6 +19,10 @@ from tinker_core import generate_story, narrate_story, select_voice
 # ✅ UI
 st.title("📖✨ TinkerTales Storymaker")
 st.caption("Where imagination meets AI and comes to life.")
+
+# ✅ Load and display banner image
+logo_image = Image.open("assets/logo.png")
+st.image(logo_image, width=300)
 
 # Inputs
 name = st.text_input("Character name", value="Ani")

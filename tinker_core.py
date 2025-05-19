@@ -47,15 +47,15 @@ def select_voice(theme, age_range):
         return "EXAVITQu4vr4xnSDxMaL"
 
 style_by_theme = {
-    "Comedy": "Make it funny, surprising, and absurd. Use outrageous situations, silly logic, wordplay, and visual gags. Include energetic pacing and unexpected turns. Think Dav Pilkey, Sandra Boynton, or Roald Dahl — chaotic, goofy, or dry, depending on age.",
-    "Spooky": "Make it spooky-but-fun with mild suspense and strange but safe surprises. Use eerie settings, playful dread, and friendly monsters. Channel R.L. Stine for older kids and Scooby-Doo or silly ghost stories for younger ones.",
-    "Fairy Tale": "Use whimsical language, magical settings, and talking creatures. Include a gentle moral, silly spells, and classic storybook structure. Think Julia Donaldson, Robert Munsch, or Gail Carson Levine.",
-    "Fantasy": "Create imaginative worlds with odd magical rules and quirky characters. Balance wonder and humor, and include enchanted objects or unusual quests. Think C.S. Lewis, early J.K. Rowling, or Shannon Messenger.",
-    "Mystery": "Make it puzzling and quirky with clever clues, red herrings, and weird logic. Include secret passages, strange suspects, and a satisfying twist. Think Lemony Snicket, The Mysterious Benedict Society, or a comedic Sherlock Holmes.",
-    "Science Fiction": "Make it inventive, clever, and slightly absurd. Use futuristic gadgets, malfunctioning tech, and offbeat science logic. Think Phineas and Ferb meets Cory Doctorow or a junior version of Hitchhiker's Guide to the Galaxy.",
-    "Outer Space": "Make it vibrant, silly, and full of space weirdness — talking aliens, gravity jokes, space pets. Keep the tone upbeat, adventurous, and zany, like a middle-grade Guardians of the Galaxy meets Sandra Boynton in zero gravity.",
     "Adventure": "Use fast pacing, physical action, and imaginative obstacles. Include treasure maps, wild villains, and big payoffs. Think Magic Tree House, Percy Jackson, or Gordon Korman — lighthearted and bold.",
-    "Bedtime": "Use gentle rhythm, soft sensory language, and calming repetition. Keep the tone poetic, dreamy, and peaceful. Think Margaret Wise Brown, Owl Moon, or Kate DiCamillo's quietest moments — perfect for winding down."
+    "Bedtime": "Use gentle rhythm, soft sensory language, and calming repetition. Keep the tone poetic, dreamy, and peaceful. Think Margaret Wise Brown, Owl Moon, or Kate DiCamillo's quietest moments — perfect for winding down.",
+    "Comedy": "Make it hilarious, chaotic, unpredictable, and full of absurdity. Use surreal logic, recurring gags, and slapstick. Think Dav Pilkey or Roald Dahl on a sugar rush. Make sure the characters barely keep up with the nonsense.",
+    "Fairy Tale": "Use whimsical language, magical settings, and talking creatures. Include a gentle moral, silly spells, and classic storybook structure. Think Julia Donaldson, Robert Munsch, or Gail Carson Levine.",
+    "Fantasy": "Make it imaginative and strange. Include bizarre magical rules and talking creatures with unexpected personalities. Think early J.K. Rowling or Lewis Carroll — whimsy with bite.",
+    "Mystery": "Make it offbeat and puzzling. Include illogical clues and red herrings. Let the mystery seem unsolvable, then resolve it with a weird but satisfying twist. Think Lemony Snicket or Mysterious Benedict Society — smart, strange, and darkly funny.",
+    "Outer Space": "Make it vibrant, silly, and full of space weirdness — talking aliens, gravity jokes, space pets. Keep the tone upbeat, adventurous, and zany, like a middle-grade Guardians of the Galaxy meets Sandra Boynton in zero gravity.",
+    "Science Fiction": "Make it inventive, clever, and slightly absurd. Use futuristic gadgets, malfunctioning tech, and offbeat science logic. Think Phineas and Ferb meets Cory Doctorow or a junior version of Hitchhiker's Guide to the Galaxy.",
+    "Spooky": "Make it spooky-but-fun with mild suspense and strange but safe surprises. Use eerie settings, playful dread, and friendly monsters. Channel R.L. Stine for older kids and Scooby-Doo or silly ghost stories for younger ones."
 }
 
 def generate_story(character_name, age_range, theme, custom_detail=None):

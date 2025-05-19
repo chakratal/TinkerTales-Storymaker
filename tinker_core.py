@@ -68,51 +68,179 @@ adventure_style_by_age = {
     "9-11": "in a fast-paced, witty tone like Rick Riordan"
 }
 
+import random
+
 content_by_theme_and_age = {
     "Comedy": {
-        "3-5": "Use silly words, animal sounds, and funny repetition. Include a dancing pickle or a giggling chicken.",
-        "6-8": "Add fart jokes, banana peels, talking animals, and zany surprises. Think Dav Pilkey-style chaos.",
-        "9-11": "Use witty wordplay, absurd situations, and a twist ending. Maybe a llama detective or invisible spaghetti."
+        "3-5": [
+            "Use silly words and animal sounds.",
+            "Include a dancing pickle.",
+            "Add funny repetition.",
+            "Mention a giggling chicken.",
+            "A talking banana gets lost at the zoo."
+        ],
+        "6-8": [
+            "Add fart jokes.",
+            "Include banana peels.",
+            "Talking animals everywhere.",
+            "Zany surprises around every corner.",
+            "Throw in a runaway toilet.",
+            "Think Dav Pilkey-style chaos."
+        ],
+        "9-11": [
+            "Use witty wordplay and absurd situations.",
+            "Add a twist ending.",
+            "Include a llama detective.",
+            "Maybe some invisible spaghetti.",
+            "A sarcastic robot joins the team."
+        ]
     },
+
     "Spooky": {
-        "3-5": "Include spooky sounds like 'creak' and 'whoosh', but keep it fun and not too scary. Think silly ghosts.",
-        "6-8": "Add creaky floors, flickering lights, and a friendly monster. The scare should turn into something funny.",
-        "9-11": "Make it suspenseful with eerie clues and an unexpected twist. Keep the ending fun and not too dark."
+        "3-5": [
+            "Include silly ghosts with squeaky shoes.",
+            "Use funny spooky sounds like 'booo-ooing!' and 'creakity creak'.",
+            "Add a haunted sandwich that keeps vanishing.",
+            "A skeleton keeps forgetting where he left his bones."
+        ],
+        "6-8": [
+            "Add flickering lights and mysterious howls.",
+            "Include a ghost who just wants to dance.",
+            "A shadowy figure turns out to be a giant cat in a hat.",
+            "Make it fun-scary with a magical twist."
+        ],
+        "9-11": [
+            "Start with eerie clues that lead to a silly surprise.",
+            "Include an abandoned library with books that whisper.",
+            "Add an owl who knows everyone's secrets.",
+            "Keep it creepy, but end on a funny or friendly note."
+        ]
     },
+
     "Mystery": {
-        "3-5": "Add a lost toy, silly detective tools, and a mystery solved by teamwork.",
-        "6-8": "Include clues, red herrings, and a clever reveal. Think junior detective squad.",
-        "9-11": "Make it clever and dramatic, with twists and a satisfying conclusion. The reader should feel like a sleuth."
+        "3-5": [
+            "Include a missing sock that leads to an adventure.",
+            "Add a detective cat with a monocle.",
+            "Use rhyming clues and silly disguises.",
+            "The mystery turns out to be about a surprise party."
+        ],
+        "6-8": [
+            "Include clues hidden in snacks or drawings.",
+            "Add red herrings like suspicious parrots.",
+            "The solution is something unexpected but fun.",
+            "Teamwork helps solve the case."
+        ],
+        "9-11": [
+            "Begin with a puzzling event like vanishing shoes.",
+            "Add plot twists and red herrings.",
+            "A sidekick keeps solving things by accident.",
+            "End with a clever reveal and satisfied 'aha!' moment."
+        ]
     },
+
     "Bedtime": {
-        "3-5": "Use soft, cozy language. Include stars, cuddly animals, and a peaceful ending.",
-        "6-8": "Add gentle adventures that wind down to sleep, like flying beds or cloud races.",
-        "9-11": "Keep it dreamy and imaginative, with quiet magic and a reflective, sleepy ending."
+        "3-5": [
+            "Include stars that sing lullabies.",
+            "Add cozy animals like a snoring panda.",
+            "The adventure winds down into a nap.",
+            "End with a soft 'goodnight' from the moon."
+        ],
+        "6-8": [
+            "Include flying beds or dreamy clouds.",
+            "A moonbeam guides the character home to bed.",
+            "Use soft, sleepy words like 'drift', 'float', and 'whisper'.",
+            "End with a warm blanket and a cuddle."
+        ],
+        "9-11": [
+            "The story should have gentle magic or wonder.",
+            "Include stargazing, quiet music, or friendly dreams.",
+            "End with peaceful thoughts and closing eyes.",
+            "Keep the tone reflective and slow-paced."
+        ]
     },
-    "Fairy Tale": {
-        "3-5": "Include talking animals, silly spells, and a kind hero. A cupcake crown might be fun too.",
-        "6-8": "Add enchanted forests, quirky villains, and a funny fairy godparent.",
-        "9-11": "Make it rich with clever twists on classic tropes—maybe a dragon who wants to be a librarian."
-    },
-    "Outer Space": {
-        "3-5": "Include aliens that giggle, colorful planets, and space snacks.",
-        "6-8": "Add rocketships, talking robots, and a surprise space disco.",
-        "9-11": "Make it adventurous and funny, with strange planets and smart alien friends."
-    },
-    "Science Fiction": {
-        "3-5": "Add friendly robots and buttons that go ‘beep’ and ‘zap’.",
-        "6-8": "Include cool gadgets, hoverboards, and kids who outsmart the machines.",
-        "9-11": "Make it techy and thoughtful, with AI gone silly or time travel gone weird."
-    },
+
     "Fantasy": {
-        "3-5": "Include dragons that sneeze bubbles, and magical animals.",
-        "6-8": "Add enchanted forests, magical riddles, and brave kids.",
-        "9-11": "Make it epic and mysterious, with ancient maps and secret spells."
+        "3-5": [
+            "Include dragons that sneeze bubbles.",
+            "Use magical pets like a unicorn puppy.",
+            "Add talking trees that tell jokes.",
+            "A rainbow slide leads to a treasure cave."
+        ],
+        "6-8": [
+            "Include enchanted forests or spellbooks.",
+            "A brave child solves a riddle from a talking frog.",
+            "Magic misfires cause silly chaos.",
+            "The villain turns out to be misunderstood."
+        ],
+        "9-11": [
+            "Add ancient maps, secret portals, and wise mentors.",
+            "Include magical battles or potion mix-ups.",
+            "A prophecy is revealed—but hilariously wrong.",
+            "Make the journey exciting, but character-driven."
+        ]
     },
+
     "Adventure": {
-        "3-5": "Include bouncing bridges, treasure hunts, and animal guides.",
-        "6-8": "Add volcanoes, traps, jungle paths, and daring escapes.",
-        "9-11": "Make it exciting and funny, with quick decisions and thrilling obstacles."
+        "3-5": [
+            "Include bouncy bridges and slippery vines.",
+            "Add treasure maps drawn in crayon.",
+            "A friendly lion helps along the way.",
+            "There’s a snack break before the final challenge."
+        ],
+        "6-8": [
+            "Include booby traps, volcanoes, and ancient keys.",
+            "A best friend joins for a wild jungle run.",
+            "Add silly dangers like marshmallow quicksand.",
+            "The villain is more goofy than scary."
+        ],
+        "9-11": [
+            "Add daring escapes and clever thinking.",
+            "Include riddles, mazes, and countdowns.",
+            "Unexpected helpers arrive just in time.",
+            "End with a funny twist or new quest hook."
+        ]
+    },
+
+    "Outer Space": {
+        "3-5": [
+            "Include friendly aliens with three eyes and silly names.",
+            "Planets made of cheese or ice cream.",
+            "Add rocket ships that say 'zoom-zap!'",
+            "The moon gives bedtime advice."
+        ],
+        "6-8": [
+            "Add space pirates who dance instead of fight.",
+            "Include a space disco on a rainbow asteroid.",
+            "A robot keeps losing its bolts mid-sentence.",
+            "End with a silly discovery like 'Planet Bubblegum'."
+        ],
+        "9-11": [
+            "Include a malfunctioning ship and a talking AI.",
+            "Aliens challenge Earth kids to a prank war.",
+            "Add strange but helpful alien tech.",
+            "Keep it adventurous but a little goofy."
+        ]
+    },
+
+    "Science Fiction": {
+        "3-5": [
+            "Include robots who love to sing.",
+            "Use funny sounds like 'bleep!' and 'buzz-bonk!'.",
+            "Add a teleporting bunny that hiccups.",
+            "The main gadget is powered by tickles."
+        ],
+        "6-8": [
+            "Include hoverboards, shrinking lasers, or bubble shields.",
+            "A robot tries to learn how to tell jokes.",
+            "Add a science fair gone hilariously wrong.",
+            "AI pets cause unexpected chaos."
+        ],
+        "9-11": [
+            "Include time travel with pizza-themed paradoxes.",
+            "A helpful AI turns out to be a trickster.",
+            "Add malfunctioning lab experiments.",
+            "Make it curious and futuristic, with comic relief."
+        ]
     }
 }
 
@@ -124,7 +252,11 @@ def generate_story(character_name, age_range, theme, custom_detail=None):
     else:
         style = style_by_theme.get(theme, "")
 
-    content = content_by_theme_and_age.get(theme, {}).get(age_range, "")
+    content_options = content_by_theme_and_age.get(theme, {}).get(age_range, "")
+    if isinstance(content_options, list):
+        content = " ".join(random.sample(content_options, min(3, len(content_options))))
+    else:
+        content = content_options
 
     prompt = f"""
     Write a short story for a child aged {age_range}. The story should include a character named {character_name} and follow the theme "{theme}".

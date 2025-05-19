@@ -321,7 +321,7 @@ content_by_theme_and_age = {
 
 def generate_story(character_name, age_range, theme, custom_detail=None):
     if theme == "Comedy":
-        style = comedy_style_by_age.get(age_range, "")
+        style = style_by_theme.get("Comedy", "")
     elif theme == "Adventure":
         style = adventure_style_by_age.get(age_range, "")
     else:

@@ -36,8 +36,8 @@ st.markdown("### ✏️ Watch Your Brainstorm Come to Life!")
 name = st.text_input("Character name", value="Ani")
 age = st.selectbox("Age range", ["3-5", "6-8", "9-11"])
 theme = st.selectbox("Theme", [
-    "Fantasy", "Fairy Tale", "Bedtime", "Comedy", "Adventure",
-    "Spooky", "Mystery", "Outer Space", "Science Fiction"
+    "Adventure", "Bedtime", "Comedy", "Fairy Tale", "Fantasy", 
+    "Mystery", "Outer Space", "Science Fiction", "Spooky"
 ])
 custom_detail = st.text_area("Have special details you'd like to include? Add them here", placeholder="e.g., Ani wears a shirt with stars...")
 

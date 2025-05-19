@@ -245,6 +245,7 @@ content_by_theme_and_age = {
 }
 
 def generate_story(character_name, age_range, theme, custom_detail=None):
+    # Choose writing style
     if theme == "Comedy":
         style = comedy_style_by_age.get(age_range, "")
     elif theme == "Adventure":
@@ -252,16 +253,15 @@ def generate_story(character_name, age_range, theme, custom_detail=None):
     else:
         style = style_by_theme.get(theme, "")
 
-    content_options = content_by_theme_and_age.get(theme, {}).get(age_range, "")
-    if isinstance(content_options, list):
-        content = " ".join(random.sample(content_options, min(3, len(content_options))))
-    else:
-        content = content_options
+    # Get randomized content flavor text
+    content_options = content_by_theme_and_age.get(theme, {}).get(age_range, [])
+    selected_content = " ".join(random.sample(content_options, min(3, len(content_options)))) if content_options else ""
 
+    # Build prompt
     prompt = f"""
     Write a short story for a child aged {age_range}. The story should include a character named {character_name} and follow the theme "{theme}".
     {f"Include this detail: {custom_detail}." if custom_detail else ""}
-    {content}
+    {selected_content}
     Write the story {style}.
     Include a creative, fun story title at the top.
     The story should have a clear beginning (introducing the character and setting), middle (a challenge or adventure), and end (a satisfying resolution).

@@ -46,32 +46,65 @@ def select_voice(theme, age_range):
     else:
         return "EXAVITQu4vr4xnSDxMaL"
 
+# === Theme-based styles ===
 style_by_theme = {
-    "Adventure": "Use fast pacing, physical action, and imaginative obstacles. Include treasure maps, wild villains, and big payoffs. Think Magic Tree House, Percy Jackson, or Gordon Korman — lighthearted and bold.",
-    "Bedtime": "Use gentle rhythm, soft sensory language, and calming repetition. Keep the tone poetic, dreamy, and peaceful. Think Margaret Wise Brown, Owl Moon, or Kate DiCamillo's quietest moments — perfect for winding down.",
-    "Comedy": "Make it hilarious, chaotic, unpredictable, and full of absurdity. Use surreal logic, recurring gags, and slapstick. Think Dav Pilkey or Roald Dahl on a sugar rush. Make sure the characters barely keep up with the nonsense.",
-    "Fairy Tale": "Use whimsical language, magical settings, and talking creatures. Include a gentle moral, silly spells, and classic storybook structure. Think Julia Donaldson, Robert Munsch, or Gail Carson Levine.",
-    "Fantasy": "Make it imaginative and strange. Include bizarre magical rules and talking creatures with unexpected personalities. Think early J.K. Rowling or Lewis Carroll — whimsy with bite.",
-    "Mystery": "Make it offbeat and puzzling. Include illogical clues and red herrings. Let the mystery seem unsolvable, then resolve it with a weird but satisfying twist. Think Lemony Snicket or Mysterious Benedict Society — smart, strange, and darkly funny.",
-    "Outer Space": "Make it vibrant, silly, and full of space weirdness — talking aliens, gravity jokes, space pets. Keep the tone upbeat, adventurous, and zany, like a middle-grade Guardians of the Galaxy meets Sandra Boynton in zero gravity.",
-    "Science Fiction": "Make it inventive, clever, and slightly absurd. Use futuristic gadgets, malfunctioning tech, and offbeat science logic. Think Phineas and Ferb meets Cory Doctorow or a junior version of Hitchhiker's Guide to the Galaxy.",
-    "Spooky": "Make it spooky-but-fun with mild suspense and strange but safe surprises. Use eerie settings, playful dread, and friendly monsters. Channel R.L. Stine for older kids and Scooby-Doo or silly ghost stories for younger ones."
+    "Adventure": """Write in a fast-paced, daring voice, like Gordon Korman mixed with Indiana Jones for kids. Make the action big and bold — crashing waves, ancient ruins, jungle vines, and surprise lava. The main character should be brave (or accidentally heroic), with wild obstacles, clever escapes, and a satisfying payoff. Let the narrator egg them on like an excited sports commentator.""",
+
+    "Bedtime": """Use a soft, soothing voice like Margaret Wise Brown meets Kate DiCamillo at her gentlest. Let the story drift like a lullaby — calm, dreamy, and filled with cozy imagery. Use rhythmic language, tender repetition, and gentle surprises (a moonbeam cat, a whispering wind). Keep everything safe and magical, perfect for winding down.""",
+
+    "Comedy": """Write in the voice of a chaotic and funny narrator, like Roald Dahl mixed with Dav Pilkey. Use ridiculous metaphors, absurd logic, and over-the-top characters (e.g. a llama wearing underpants). Fill the story with recurring gags, surprising twists, and visual silliness. Make it feel like the narrator can barely keep up with how bonkers the story gets. Focus on joy, momentum, and pure ridiculous fun.""",
+
+    "Fairy Tale": """Write in a whimsical, old-timey voice, like Julia Donaldson meets a friendly storyteller from long ago. Use poetic language, magical settings, and talking animals with big personalities. Include a silly spell or a gentle moral. Make the narrator feel like they’re telling this tale for the hundredth time — full of charm, rhythm, and wonder.""",
+
+    "Fantasy": """Write in a strange, curious voice, like early J.K. Rowling meets Lewis Carroll. Let the magical world have bizarre rules (e.g. talking carrots, invisible staircases, whispering puddles). The narrator should be amused and slightly confused by the world, but excited to explore it. Fill the story with unexpected characters, imaginative landscapes, and logic that only kind of makes sense.""",
+
+    "Mystery": """Use a sly, clever narrator voice like Lemony Snicket with a magnifying glass. Let the narrator drop hints, throw in fake clues, and act like they know more than they’re telling. Make the mystery just barely solvable, with odd characters and suspicious details. Build tension with humor and finish with a twist that makes kids gasp and laugh at once.""",
+
+    "Outer Space": """Write with giddy excitement, like a space-obsessed kid telling you about their alien best friend. Use big, colorful imagery: zero-gravity cereal, giggling space goats, malfunctioning moon boots. The narrator should sound wide-eyed and a little breathless, like they just got back from the rocket. Keep it upbeat, weird, and full of surprise tech and aliens with silly customs.""",
+
+    "Science Fiction": """Write like a madcap inventor crossed with a sarcastic robot. Let the story be full of wild gadgets, ridiculous inventions, and techno-mayhem. The narrator should love science but not quite understand it — use fake jargon, zany logic, and plenty of ‘uh-oh’ moments with machines gone haywire. Think junior Hitchhiker’s Guide with a dash of Phineas and Ferb.""",
+
+    "Spooky": """Write in a playful spooky voice, like a camp counselor telling a ghost story with a flashlight under their chin. Use creaky floors, misty woods, glowing eyes — but make it all fun-scary, not real-scary. Let the narrator spook and reassure at the same time: “But don’t worry, the ghost just wanted a snack.” Keep it mysterious, a little eerie, but safe and silly at the end."""
 }
 
+# === New: Age-based guidance ===
+def get_age_style(age_range):
+    style_by_age = {
+        "3-5": "Use simple vocabulary, short sentences, and lots of repetition. Keep the plot linear and the conflict gentle. Use funny sounds, talking animals, and a cozy resolution.",
+        "6-8": "Add more excitement, faster pacing, and slightly more complex language. Include jokes, wordplay, and a strong emotional core. Let the characters solve a problem or face a challenge.",
+        "9-11": "Use clever dialogue, deeper themes, and more layered plots. Include witty narration, surprising twists, and a mix of humor and stakes. The story can be longer and slightly more sophisticated."
+    }
+    return style_by_age.get(age_range, "")
+
+# === New: Theme-based style lookup ===
+def get_theme_style(theme):
+    return style_by_theme.get(theme, "")
+
+# === Updated story generator ===
 def generate_story(character_name, age_range, theme, custom_detail=None):
-    style = style_by_theme.get(theme, "")
+    theme_style = get_theme_style(theme)
+    age_style = get_age_style(age_range)
 
     prompt = f"""
 Write an imaginative, age-appropriate story for a child aged {age_range}.
+
 The main character is named {character_name}, and the story should follow the theme: "{theme}".
+
 {f"Include this detail: {custom_detail}" if custom_detail else ""}
-{style}
+
+Style notes for the writer:
+{theme_style}
+
+Adjust your tone and structure to suit a child aged {age_range}:
+{age_style}
+
 Avoid narrator introductions — just dive into the story.
 
 The story should include:
 - A creative, fun title
 - A clear beginning, middle, and end
-- Around 500-650 words
+- At least one surprising twist or unexpected character
+- Around 500–550 words
 """
 
     response = openai.ChatCompletion.create(
@@ -82,6 +115,7 @@ The story should include:
     )
     return response["choices"][0]["message"]["content"]
 
+# === Image generator ===
 def generate_image(prompt):
     response = openai.Image.create(
         model="dall-e-3",

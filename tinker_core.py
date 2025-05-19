@@ -296,30 +296,32 @@ def generate_story(character_name, age_range, theme, custom_detail=None):
     else:
         style = style_by_theme.get(theme, "")
 
-    # Get randomized content flavor text
-    content_options = content_by_theme_and_age.get(theme, {}).get(age_range, [])
-    selected_elements = random.sample(content_options, min(3, len(content_options)))
-    content_snippets = "\n".join(f"- {item}" for item in selected_elements)
+    tone_instruction = {
+        "Comedy": "Make it funny, surprising, and absurd in a way that fits the age range.",
+        "Spooky": "Make it spooky but still fun and age-appropriate, with gentle suspense and playful scares.",
+        "Fairy Tale": "Make it whimsical, magical, and imaginative with a sense of wonder.",
+        "Fantasy": "Make it magical and adventurous, full of creative worldbuilding and lighthearted charm.",
+        "Mystery": "Make it puzzling and intriguing, with clever twists and quirky logic.",
+        "Science Fiction": "Make it inventive, imaginative, and a little weird, with playful sci-fi elements.",
+        "Outer Space": "Make it zany and fun, with cosmic adventure and interstellar silliness.",
+        "Adventure": "Make it exciting, fast-paced, and full of action, surprises, and clever turns.",
+        "Bedtime": "Make it calm, soothing, and poetic — perfect for winding down before sleep."
+    }.get(theme, "")
 
-    # Build clean, no-nonsense prompt
     prompt = f"""
-Write an imaginative, age-appropriate story for a child aged {age_range}. 
+Write an imaginative, age-appropriate story for a child aged {age_range}.
 The main character is named {character_name}, and the story should follow the theme: "{theme}".
-
-Include:
-{content_snippets}
-{f"- A specific detail: {custom_detail}" if custom_detail else ""}
-
-The story should have:
-- A creative title
-- A clear beginning (introduce setting and character)
-- A fun middle (a problem or adventure)
-- A satisfying ending (with resolution or twist)
-- Around 500-650 words
-
+{f"Include this detail: {custom_detail}" if custom_detail else ""}
 Use a tone and storytelling style {style}.
-Avoid narrator commentary or introductions — just start the story.
+{tone_instruction}
+Avoid narrator introductions — just dive into the story.
+
+The story should include:
+- A creative, fun title
+- A clear beginning, middle, and end
+- Around 500–650 words
 """
+
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],

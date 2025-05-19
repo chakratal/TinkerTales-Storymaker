@@ -261,7 +261,6 @@ content_by_theme_and_age = {
 }
 
 def generate_story(character_name, age_range, theme, custom_detail=None):
-    # Choose writing style
     if theme == "Comedy":
         style = comedy_style_by_age.get(age_range, "")
     elif theme == "Adventure":
@@ -271,23 +270,32 @@ def generate_story(character_name, age_range, theme, custom_detail=None):
 
     # Get randomized content flavor text
     content_options = content_by_theme_and_age.get(theme, {}).get(age_range, [])
-    selected_content = " ".join(random.sample(content_options, min(3, len(content_options)))) if content_options else ""
+    selected_elements = random.sample(content_options, min(3, len(content_options)))
+    content_snippets = "\n".join(f"- {item}" for item in selected_elements)
 
-    # Build prompt
+    # Build clean, no-nonsense prompt
     prompt = f"""
-    Write a short story for a child aged {age_range}. The story should include a character named {character_name} and follow the theme "{theme}".
-    {f"Include this detail: {custom_detail}." if custom_detail else ""}
-    {selected_content}
-    Write the story {style}.
-    Include a creative, fun story title at the top.
-    The story should have a clear beginning (introducing the character and setting), middle (a challenge or adventure), and end (a satisfying resolution).
-    Make the story around 500-650 words long. Keep it age-appropriate and imaginative.
-    """
+Write an imaginative, age-appropriate story for a child aged {age_range}. 
+The main character is named {character_name}, and the story should follow the theme: "{theme}".
 
+Include:
+{content_snippets}
+{f"- A specific detail: {custom_detail}" if custom_detail else ""}
+
+The story should have:
+- A creative title
+- A clear beginning (introduce setting and character)
+- A fun middle (a problem or adventure)
+- A satisfying ending (with resolution or twist)
+- Around 500-650 words
+
+Use a tone and storytelling style {style}.
+Avoid narrator commentary or introductions — just start the story.
+"""
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.8,
+        temperature=0.85,
         max_tokens=1000
     )
     return response["choices"][0]["message"]["content"]

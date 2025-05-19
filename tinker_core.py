@@ -47,14 +47,45 @@ def select_voice(theme, age_range):
         return "EXAVITQu4vr4xnSDxMaL"  # Sarah (default fallback)
 
 style_by_theme = {
-    "Fairy Tale": "in a whimsical, magical style like J.K. Rowling",
-    "Bedtime": "in a gentle, soothing voice like Margaret Wise Brown",
-    "Outer Space": "in a blend of cosmic wonder and humor, like Carl Sagan meets Roald Dahl",
-    "Science Fiction": "in a curious, thoughtful voice like Madeleine L'Engle",
-    "Fantasy": "in a mythic, magical tone like C.S. Lewis",
-    "Mystery": "in a clever, dramatic style like Lemony Snicket",
-    "Spooky": "in a slightly eerie but fun tone like R.L. Stine"
+    "Comedy": (
+        "Make it funny, surprising, and absurd. Use outrageous situations, silly logic, wordplay, "
+        "and visual gags. Include energetic pacing and unexpected turns. Think Dav Pilkey, Sandra Boynton, "
+        "or Roald Dahl — chaotic, goofy, or dry, depending on age."
+    ),
+    "Spooky": (
+        "Make it spooky-but-fun with mild suspense and strange but safe surprises. Use eerie settings, "
+        "playful dread, and friendly monsters. Channel R.L. Stine for older kids and Scooby-Doo or silly ghost stories for younger ones."
+    ),
+    "Fairy Tale": (
+        "Use whimsical language, magical settings, and talking creatures. Include a gentle moral, silly spells, "
+        "and classic storybook structure. Think Julia Donaldson, Robert Munsch, or Gail Carson Levine."
+    ),
+    "Fantasy": (
+        "Create imaginative worlds with odd magical rules and quirky characters. Balance wonder and humor, "
+        "and include enchanted objects or unusual quests. Think C.S. Lewis, early J.K. Rowling, or Shannon Messenger."
+    ),
+    "Mystery": (
+        "Make it puzzling and quirky with clever clues, red herrings, and weird logic. Include secret passages, strange suspects, "
+        "and a satisfying twist. Think Lemony Snicket, The Mysterious Benedict Society, or a comedic Sherlock Holmes."
+    ),
+    "Science Fiction": (
+        "Make it inventive, clever, and slightly absurd. Use futuristic gadgets, malfunctioning tech, and offbeat science logic. "
+        "Think Phineas and Ferb meets Cory Doctorow or a junior version of Hitchhiker's Guide to the Galaxy."
+    ),
+    "Outer Space": (
+        "Make it vibrant, silly, and full of space weirdness — talking aliens, gravity jokes, space pets. "
+        "Keep the tone upbeat, adventurous, and zany, like a middle-grade Guardians of the Galaxy meets Sandra Boynton in zero gravity."
+    ),
+    "Adventure": (
+        "Use fast pacing, physical action, and imaginative obstacles. Include treasure maps, wild villains, and big payoffs. "
+        "Think Magic Tree House, Percy Jackson, or Gordon Korman — lighthearted and bold."
+    ),
+    "Bedtime": (
+        "Use gentle rhythm, soft sensory language, and calming repetition. Keep the tone poetic, dreamy, and peaceful. "
+        "Think Margaret Wise Brown, Owl Moon, or Kate DiCamillo’s quietest moments — perfect for winding down."
+    )
 }
+
 
 comedy_style_by_age = {
     "3-5": "in a silly, rhythmic style like Sandra Boynton",

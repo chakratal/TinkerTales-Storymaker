@@ -54,15 +54,17 @@ style_by_theme = {
     "Fairy Tale": """Write in a whimsical, old-timey voice, like Julia Donaldson meets a friendly storyteller from long ago...""",
     "Fantasy": """Write in a strange, curious voice, like early J.K. Rowling meets Lewis Carroll...""",
     "Mystery": """
-    Use a sly, clever narrator voice like Lemony Snicket with a magnifying glass and a cookie crumb trail.
+    Use a sly, clever narrator voice like Lemony Snicket meets Gordon Korman.
 
-    Start the story with a cozy, slightly mysterious setting (e.g., “In a town where it always smelled faintly of pancakes,” “On a foggy morning when the gnomes were up to something,” etc.).
+    Start with a cozy, slightly mysterious setting (e.g., “In a town where it always smelled faintly of pancakes…”). Introduce Uma, the clever and dramatic kid detective, in the middle of a minor crisis (e.g., her shoe is missing, her lunch exploded, something is glittering that should not be glittering).
 
-    Then introduce Uma, a clever and slightly dramatic kid detective, in the middle of a very serious personal problem (like a missing slipper, a vanishing sandwich, or a glitter trail that should not exist). The mystery should be fun, weird, and surprising—but still grounded.
+    Avoid repeating her name constantly—use varied sentence structure, playful pronouns, and inner thoughts to keep it fresh. Let the narrator *talk to the reader*, adding funny asides or sarcastic commentary when things get weird.
 
-    The tone should be playful, fast-paced, and filled with little twists, red herrings, and running jokes (e.g., suspicious cats, peanut butter trees, morally shady frogs).
+    Add side characters with big personalities—even if they only show up briefly. Animals, neighbors, enchanted gnomes—give them all at least one funny trait or opinion.
 
-    Let the mystery end in a clever solution, not just a reveal. Uma should feel like the hero because she *figured it out*.
+    The plot should have some chaos, misdirection, and cleverness. Uma should solve the mystery through logic or improvisation, not by luck or being told the answer.
+
+    End with a twist, callback, or running joke that ties it all together.
     """,
     "Outer Space": """Write with giddy excitement, like a space-obsessed kid telling you about their alien best friend...""",
     "Science Fiction": """Write like a madcap inventor crossed with a sarcastic robot...""",

@@ -54,15 +54,15 @@ style_by_theme = {
     "Fairy Tale": """Write in a whimsical, old-timey voice, like Julia Donaldson meets a friendly storyteller from long ago...""",
     "Fantasy": """Write in a strange, curious voice, like early J.K. Rowling meets Lewis Carroll...""",
     "Mystery": """
-    Use a playful, clever narrator voice like Lemony Snicket crossed with Gordon Korman.
+    Use a clever, playful narrator voice—something between Lemony Snicket and Gordon Korman.
 
-    Begin with a cozy but curious setting (e.g., “In a town where the clouds gossiped…”). Introduce Uma, the dramatic kid detective, in the middle of a personal crisis (a missing object, suspicious trail, etc.). Vary how you refer to her—don’t just repeat “Uma” in every sentence. Use pronouns, internal thoughts, or descriptions like “the detective,” “she,” or “our hero.”
+    Start with a cozy, slightly mysterious setting (e.g., “In a town where the clouds gossiped…”). Introduce Uma, a dramatic and observant kid detective, in the middle of a seemingly minor crisis (a missing object, a weird noise, a suspicious trail). Use pronouns, inner thoughts, and varied sentence structures to avoid repeating her name too often.
 
-    Add silly or suspicious side characters with unique quirks (e.g., Tommy who’s allergic to glitter, Sarah who tracks suspects by scent, or a frog who knows secrets but never talks).
+    Build the mystery with misdirection, playful twists, and side characters who have strong personalities and quirks. Seed suspects or details early so they don't feel random later.
 
-    Let Uma investigate by following clues, interviewing suspects, and jumping to a few wrong conclusions first. Use at least one running gag or twist. Don’t reveal the culprit too early—build tension, surprise, and humor.
+    Add at least one unexpected turn, like a malfunctioning invention or a clue that leads nowhere. Let the story include running jokes, surprise reactions, and humorous moments that reveal character.
 
-    Let the resolution feel earned. Uma should solve the mystery in a clever or weird way, and end with a joke, callback, or one-liner that wraps it all up with personality.
+    End with a satisfying solution that feels earned—ideally with a twist, a callback, or an emotional or funny beat. Let Uma feel smart, but don't make her explain everything. Let the reader connect the last dots.
     """,
     "Outer Space": """Write with giddy excitement, like a space-obsessed kid telling you about their alien best friend...""",
     "Science Fiction": """Write like a madcap inventor crossed with a sarcastic robot...""",

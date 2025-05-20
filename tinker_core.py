@@ -54,19 +54,19 @@ style_by_theme = {
     "Fairy Tale": """Write in a whimsical, old-timey voice, like Julia Donaldson meets a friendly storyteller from long ago...""",
     "Fantasy": """Write in a strange, curious voice, like early J.K. Rowling meets Lewis Carroll...""",
     "Mystery": """
-    Use a clever, playful narrator voice—something between Lemony Snicket and Gordon Korman.
+    Write in a playful, clever voice like Lemony Snicket or Gordon Korman. Use dry humor, dramatic exaggeration, and occasional asides to the reader.
 
-    Start with a cozy, slightly mysterious setting (e.g., “In a town where the clouds gossiped…”). Introduce Uma, a dramatic and observant kid detective, in the middle of a seemingly minor crisis (a missing object, a weird noise, a suspicious trail). Use pronouns, inner thoughts, and varied sentence structures to avoid repeating her name too often.
+    The story must revolve around a real mystery (not a prank), with strange suspects and absurd clues that seem useless at first but make sense later.
 
-    Build the mystery with misdirection, playful twists, and side characters who have strong personalities and quirks. Let them feel chaotic, suspicious, or downright weird. They should not behave politely or predictably. Give at least one suspect a truly strange or funny trait (e.g., hoards raisins, talks in rhymes, insists a bird told them who did it). Seed those traits early so their later involvement feels earned—not random.
+    Avoid repeating the main character's name too much. Use pronouns, reactions, and inner thoughts to vary the sentence structure and keep things engaging.
 
-    Add at least one unexpected turn—like a clue that leads nowhere, a malfunctioning invention, or a red herring that throws Uma off track. Use running jokes, surprising reactions, or absurd logic to keep things playful.
+    Side characters should be odd, dramatic, or over-the-top. Think: someone who talks only in rhyme, a librarian who refuses to whisper, or a pigeon with a vendetta. Let them feel chaotic, suspicious, or weird — never generic.
 
-    Avoid contradicting earlier clues. If someone finds the missing item, make sure their actions make sense. Don’t have a character confess to eating something that’s later found uneaten. Keep the story’s logic consistent and the resolution satisfying.
+    Make sure the twist isn't a quiet confession. Aim for something funny, dramatic, or ridiculous. It should feel surprising but consistent with the clues dropped earlier.
 
-    The twist should not be a quiet confession. Make it funny, dramatic, or ridiculous. Maybe Max was hiding crumbs in his sock. Maybe the cookie was booby-trapped. Maybe there was a secret second cookie.
+    The narrator should have a voice — let them make snarky comments, express disbelief, or joke with the reader. The story should feel like a mash-up of Snicket's mystery absurdism and Korman's fast, funny pacing.
 
-    End with a satisfying twist, callback, or joke. Let the narrator share an opinion or aside with the reader—something snarky, dramatic, or unexpectedly wise.
+    Finish with a satisfying or hilarious resolution and a final wink to the reader.
     """,
     "Outer Space": """Write with giddy excitement, like a space-obsessed kid telling you about their alien best friend...""",
     "Science Fiction": """Write like a madcap inventor crossed with a sarcastic robot...""",

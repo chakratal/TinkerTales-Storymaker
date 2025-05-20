@@ -86,8 +86,8 @@ def get_age_style(age_range):
 def get_theme_style(theme):
     return style_by_theme.get(theme, "")
 
-# === Updated story generator ===
-def generate_story(character_name, age_range, theme, custom_detail=None):
+# === story generator ===
+def generate_story(character_name, age_range, theme, custom_detail=None, story_prompt=None):
     theme_style = get_theme_style(theme)
     age_style = get_age_style(age_range)
 
@@ -96,6 +96,7 @@ Write an imaginative, age-appropriate story for a child aged {age_range}.
 
 The main character is named {character_name}, and the story should follow the theme: "{theme}".
 
+{f"This is the main story setup: {story_prompt}" if story_prompt else ""}
 {f"Include this detail: {custom_detail}" if custom_detail else ""}
 
 Style notes for the writer:

@@ -58,11 +58,15 @@ style_by_theme = {
 
     Start with a cozy, slightly mysterious setting (e.g., “In a town where the clouds gossiped…”). Introduce Uma, a dramatic and observant kid detective, in the middle of a seemingly minor crisis (a missing object, a weird noise, a suspicious trail). Use pronouns, inner thoughts, and varied sentence structures to avoid repeating her name too often.
 
-    Build the mystery with misdirection, playful twists, and side characters who have strong personalities and quirks. Seed suspects or details early so they don't feel random later.
+    Build the mystery with misdirection, playful twists, and side characters who have strong personalities and quirks. Let them feel chaotic, suspicious, or downright weird. They should not behave politely or predictably. Give at least one suspect a truly strange or funny trait (e.g., hoards raisins, talks in rhymes, insists a bird told them who did it). Seed those traits early so their later involvement feels earned—not random.
 
-    Add at least one unexpected turn, like a malfunctioning invention or a clue that leads nowhere. Let the story include running jokes, surprise reactions, and humorous moments that reveal character.
+    Add at least one unexpected turn—like a clue that leads nowhere, a malfunctioning invention, or a red herring that throws Uma off track. Use running jokes, surprising reactions, or absurd logic to keep things playful.
 
-    End with a satisfying solution that feels earned—ideally with a twist, a callback, or an emotional or funny beat. Let Uma feel smart, but don't make her explain everything. Let the reader connect the last dots.
+    Avoid contradicting earlier clues. If someone finds the missing item, make sure their actions make sense. Don’t have a character confess to eating something that’s later found uneaten. Keep the story’s logic consistent and the resolution satisfying.
+
+    The twist should not be a quiet confession. Make it funny, dramatic, or ridiculous. Maybe Max was hiding crumbs in his sock. Maybe the cookie was booby-trapped. Maybe there was a secret second cookie.
+
+    End with a satisfying twist, callback, or joke. Let the narrator share an opinion or aside with the reader—something snarky, dramatic, or unexpectedly wise.
     """,
     "Outer Space": """Write with giddy excitement, like a space-obsessed kid telling you about their alien best friend...""",
     "Science Fiction": """Write like a madcap inventor crossed with a sarcastic robot...""",

@@ -93,12 +93,11 @@ def generate_story(character_name, age_range, theme, custom_detail=None, story_p
 
     prompt = f"""
     Write an imaginative, age-appropriate story for a child aged {age_range}.
-
     The main character is named {character_name}, and the story should follow the theme: "{theme}".
-
-    The story must follow this setup exactly: "{story_prompt}". This prompt defines the main conflict and cannot be changed or reversed.
-
-    Do not reinterpret or ignore the prompt. Do not make the main character disappear if the prompt says they are solving a disappearance.
+    The story must center on the following prompt: "{story_prompt}". This is the main conflict or situation and must drive the plot from beginning to end.
+    Do NOT replace this prompt with a different mystery, conflict, or misunderstanding (like food theft, pranks, or random animal behavior). 
+    Do not reinterpret the prompt into something unrelated. The resolution should directly address the situation described above, using clues, logic, and 
+    character choices to build the story.
 
     {f"Include this detail: {custom_detail}" if custom_detail else ""}
 

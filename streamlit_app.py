@@ -39,7 +39,7 @@ theme = st.selectbox("Theme", [
     "Adventure", "Bedtime", "Comedy", "Fairy Tale", "Fantasy", 
     "Mystery", "Outer Space", "Science Fiction", "Spooky"
 ])
-story_prompt = st.text_area("Optional story prompt")
+story_prompt = st.text_area("Story prompt")
 custom_detail = st.text_area("Add any special details you'd like to include")
 
 # Generate story

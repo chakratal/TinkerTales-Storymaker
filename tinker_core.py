@@ -96,7 +96,8 @@ def generate_story(character_name, age_range, theme, custom_detail=None, story_p
 
     The main character is named {character_name}, and the story should follow the theme: "{theme}".
 
-    {f"The story should be based on the following prompt: {story_prompt}" if story_prompt else ""}
+    The story **must** be based on the following prompt: "{story_prompt}". Treat this as the central plot.
+
     {f"Include this detail: {custom_detail}" if custom_detail else ""}
 
     Style notes for the writer:

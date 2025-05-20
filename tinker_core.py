@@ -92,27 +92,27 @@ def generate_story(character_name, age_range, theme, custom_detail=None, story_p
     age_style = get_age_style(age_range)
 
     prompt = f"""
-Write an imaginative, age-appropriate story for a child aged {age_range}.
+    Write an imaginative, age-appropriate story for a child aged {age_range}.
 
-The main character is named {character_name}, and the story should follow the theme: "{theme}".
+    The main character is named {character_name}, and the story should follow the theme: "{theme}".
 
-{f"This is the main story setup: {story_prompt}" if story_prompt else ""}
-{f"Include this detail: {custom_detail}" if custom_detail else ""}
+    {f"The story should be based on the following prompt: {story_prompt}" if story_prompt else ""}
+    {f"Include this detail: {custom_detail}" if custom_detail else ""}
 
-Style notes for the writer:
-{theme_style}
+    Style notes for the writer:
+    {theme_style}
 
-Adjust your tone and structure to suit a child aged {age_range}:
-{age_style}
+    Adjust your tone and structure to suit a child aged {age_range}:
+    {age_style}
 
-Avoid narrator introductions — just dive into the story.
+    Avoid narrator introductions — just dive into the story.
 
-The story should include:
-- A creative, fun title
-- A clear beginning, middle, and end
-- At least one surprising twist or unexpected character
-- Around 500–550 words
-"""
+    The story should include:
+    - A creative, fun title
+    - A clear beginning, middle, and end
+    - At least one surprising twist or unexpected character
+    - Around 500-550 words
+    """
 
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",

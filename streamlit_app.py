@@ -39,12 +39,13 @@ theme = st.selectbox("Theme", [
     "Adventure", "Bedtime", "Comedy", "Fairy Tale", "Fantasy", 
     "Mystery", "Outer Space", "Science Fiction", "Spooky"
 ])
-custom_detail = st.text_area("Have special details you'd like to include? Add them here", placeholder="e.g., Ani wears a shirt with stars...")
+story_prompt = st.text_area("Optional story prompt")
+custom_detail = st.text_area("Add any special details you'd like to include")
 
 # Generate story
 if st.button("Generate Story"):
     with st.spinner("Writing your story..."):
-        story = generate_story(name, age, theme, custom_detail)
+        story = generate_story(name, age, theme, custom_detail, story_prompt)
         st.session_state["story"] = story
         st.session_state["voice"] = select_voice(theme, age)
 

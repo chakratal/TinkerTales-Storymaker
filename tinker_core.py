@@ -96,7 +96,9 @@ def generate_story(character_name, age_range, theme, custom_detail=None, story_p
 
     The main character is named {character_name}, and the story should follow the theme: "{theme}".
 
-    The story **must** be based on the following prompt: "{story_prompt}". Treat this as the central plot.
+    The story must follow this setup exactly: "{story_prompt}". This prompt defines the main conflict and cannot be changed or reversed.
+
+    Do not reinterpret or ignore the prompt. Do not make the main character disappear if the prompt says they are solving a disappearance.
 
     {f"Include this detail: {custom_detail}" if custom_detail else ""}
 

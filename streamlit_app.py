@@ -87,12 +87,12 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-    # Generate and display image
-    if st.button("🖼️ Generate Illustration"):
-        with st.spinner("Drawing your story..."):
-            image_prompt = f"A whimsical illustration of {name} in a {theme} story for children"
-            image_url = generate_image(image_prompt)
-            st.image(image_url, caption="AI-generated illustration", use_container_width=True)
+# Generate and display image
+if st.button("🖼️ Generate Illustration"):
+    with st.spinner("Drawing your story..."):
+        image_prompt = f"A whimsical illustration of {name} in a {theme} story for children"
+        image_url = generate_image(image_prompt)
+        st.image(image_url, caption="AI-generated illustration", use_container_width=True)
 
 # Generate narration
 if "story" in st.session_state and st.button("🎧 Generate Narration"):

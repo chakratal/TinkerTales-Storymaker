@@ -53,24 +53,10 @@ style_by_theme = {
     "Comedy": """Write in the voice of a chaotic and funny narrator, like Roald Dahl mixed with Dav Pilkey...""",
     "Fairy Tale": """Write in a whimsical, old-timey voice, like Julia Donaldson meets a friendly storyteller from long ago...""",
     "Fantasy": """Write in a strange, curious voice, like early J.K. Rowling meets Lewis Carroll...""",
-    "Mystery": """Write in a clever, fast-paced voice like Lemony Snicket or Gordon Korman. Let the narrator be dryly funny, slightly exasperated, and full of commentary.
-
-    Center the story on a real mystery (not a prank), with weird suspects and absurd clues that seem useless at first but make sense later.
-
-    Side characters should be strange and suspicious: think a rhyming janitor, a furious pigeon, or a librarian with a grudge. Avoid bland resolutions—aim for a twist that’s silly, dramatic, or hilariously surprising.
-
-    The narrator should guide us with snark and disbelief, making the mystery feel absurd, exciting, and full of charm.""",
+    "Mystery": """Write in a clever, fast-paced voice like Lemony Snicket with a narrator who is dryly funny, slightly exasperated, and full of absurd, exciting, charming commentary.""",
     "Outer Space": """Write with giddy excitement, like a space-obsessed kid telling you about their alien best friend...""",
     "Science Fiction": """Write like a madcap inventor crossed with a sarcastic robot...""",
-    "Spooky": """
-    Write in a darkly playful voice, like Lemony Snicket crossed with Edward Gorey. The narrator should be dramatic, slightly grim, and not afraid to break the fourth wall to offer warnings, opinions, or unhelpful commentary.
-
-    Use absurd but oddly logical twists — such as haunted teaspoons, ghostly librarians with overdue grudges, or invisible foghorns that only play polka music. Characters should behave in hilariously doomed or melodramatic ways, and they should never simply explain things when they can overcomplicate them.
-
-    Embrace deadpan humor, hyper-specific phobias, and strange metaphors. The story should sound like it’s being told by a slightly exasperated narrator who doesn’t fully trust the reader to survive the tale.
-
-    End with a wonderfully odd twist, a grim but silly punchline, or an unresolved mystery. Above all, make it weird, theatrical, and deliciously spooky—but not actually scary.
-    """
+    "Spooky": """Write in a darkly playful voice, like Edward Gorey. The narrator should be dramatic, slightly grim, and offer absurd twists."""
 }
 
 # === Age-based guidance ===

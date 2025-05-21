@@ -2,6 +2,16 @@ import openai
 from elevenlabs import generate, set_api_key, VoiceSettings
 from dotenv import load_dotenv
 import os
+# After your imports in tinker_core.py
+from config import STYLE_BY_THEME, VOICE_IDS
+from functools import lru_cache
+
+@lru_cache(maxsize=None)
+def select_voice(theme: str, age_range: str) -> str:
+    # For Comedy, use theme–age combos; otherwise just theme
+    key = f"{theme}-{age_range}" if theme == "Comedy" else theme
+    # Fall back to "Bedtime" voice if we don’t find a match
+    return VOICE_IDS.get(key, VOICE_IDS["Bedtime"])
 
 # Load .env locally or rely on Streamlit secrets in the app
 load_dotenv()
@@ -19,47 +29,6 @@ def narrate_story(story_text, filename="story.mp3", voice_id="EXAVITQu4vr4xnSDxM
         f.write(audio)
     print(f"🎧 Narration saved as {filename}")
 
-def select_voice(theme, age_range):
-    if theme == "Bedtime":
-        return "EXAVITQu4vr4xnSDxMaL"
-    elif theme == "Fairy Tale":
-        return "ZF6FPAbjXT4488VcRRnw"
-    elif theme == "Spooky":
-        return "onwK4e9ZLuTAKqWW03F9"
-    elif theme == "Comedy":
-        if age_range == "3-5":
-            return "pFZP5JQG7iQjIQuC4Bku"
-        elif age_range == "6-8":
-            return "cgSgspJ2msm6clMCkdW9"
-        elif age_range == "9-11":
-            return "j9jfwdrw7BRfcR43Qohk"
-    elif theme == "Fantasy":
-        return "j9jfwdrw7BRfcR43Qohk"
-    elif theme == "Adventure":
-        return "9BWtsMINqrJLrRacOk9x"
-    elif theme == "Mystery":
-        return "NFG5qt843uXKj4pFvR7C"
-    elif theme == "Outer Space":
-        return "XrExE9yKIg1WjnnlVkGX"
-    elif theme == "Science Fiction":
-        return "IKne3meq5aSn9XLyUdCD"
-    else:
-        return "EXAVITQu4vr4xnSDxMaL"
-
-# === Theme-based styles ===
-style_by_theme = {
-    "Adventure": """Write in a fast-paced, daring voice, like Gordon Korman mixed with Indiana Jones for kids...""",
-    "Bedtime": """Use a soft, soothing voice like Margaret Wise Brown meets Kate DiCamillo at her gentlest...""",
-    "Comedy": """Write in the voice of a chaotic and funny narrator, like Roald Dahl mixed with Dav Pilkey...""",
-    "Fairy Tale": """Write in a whimsical, old-timey voice, like Julia Donaldson meets a friendly storyteller from long ago...""",
-    "Fantasy": """Write in a strange, curious voice, like early J.K. Rowling meets Lewis Carroll...""",
-    "Mystery": """Write like Lemony Snicket with a fast pace and dry humor. There must be a real mystery (not a prank) with odd clues and strange suspects. 
-    End with a clever or ridiculous twist that actually solves the case.""",
-    "Outer Space": """Write with giddy excitement, like a space-obsessed kid telling you about their alien best friend...""",
-    "Science Fiction": """Write like a madcap inventor crossed with a sarcastic robot...""",
-    "Spooky": """Write in a darkly playful voice, like Edward Gorey. The narrator should be dramatic,  grim, slightly unhelpful, and offer absurd twists. 
-    End with a weird, ironic twist or unresolved mystery. Keep it spooky-but-silly, not scary."""}
-
 # === Age-based guidance ===
 def get_age_style(age_range):
     style_by_age = {
@@ -69,13 +38,12 @@ def get_age_style(age_range):
     }
     return style_by_age.get(age_range, "")
 
-# === Theme-based style lookup ===
-def get_theme_style(theme):
-    return style_by_theme.get(theme, "")
-
 # === story generator ===
 def generate_story(character_name, age_range, theme, custom_detail=None, story_prompt=None):
-    theme_style = get_theme_style(theme)
+    # pull style directly from your JSON-backed dict
+    theme_style = STYLE_BY_THEME.get(theme, "")
+
+    # your existing age logic stays the same
     age_style = get_age_style(age_range)
 
     prompt = f"""

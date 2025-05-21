@@ -2,65 +2,95 @@ import streamlit as st
 import openai
 from elevenlabs import set_api_key
 import os
-from dotenv import load_dotenv
 from PIL import Image
-from tinker_core import generate_story, narrate_story, select_voice, generate_image
+from tinker_core import generate_story, generate_image, select_voice, narrate_story
 
-# ✅ Set Streamlit page config
+# ——— Page config & CSS ———————————————————————————————
 st.set_page_config(page_title="TinkerTales Storymaker", page_icon="✨")
+st.markdown(
+    """
+    <style>
+    .reportview-container { background-color: #fdfdfd; }
+    h1, h2, h3 { font-family: 'Comic Sans MS', cursive; }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-# ✅ Load secrets into environment
+# ——— Load secrets —————————————————————————————————————
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 set_api_key(st.secrets["ELEVEN_API_KEY"])
 
-# ✅ UI
+# ——— Header & Logo ——————————————————————————————————————
 st.title("📖✨ TinkerTales Storymaker")
 st.caption("Where imagination meets AI and comes to life.")
-
-# 👆 Add space above the image
 st.markdown("&nbsp;", unsafe_allow_html=True)
-
-# ✅ Load and display logo
-logo_image = Image.open("assets/logo.png")
-st.image(logo_image, use_container_width=True)
-
-# 👇 Space below the image
+logo = Image.open("assets/logo.png")
+st.image(logo, use_container_width=True)
 st.markdown("&nbsp;", unsafe_allow_html=True)
-
 st.markdown("### ✏️ Watch Your Brainstorm Come to Life!")
 
-# Inputs
-name = st.text_input("Character name", value="Ani")
-age = st.selectbox("Age range", ["3-5", "6-8", "9-11"])
-theme = st.selectbox("Theme", [
-    "Adventure", "Bedtime", "Fairy Tale", "Fantasy", 
-    "Mystery", "Outer Space", "Spooky"
-])
-story_prompt = st.text_area("Story prompt")
-custom_detail = st.text_area("Add any special details you'd like!")
+# ——— Sidebar: Inputs & “Generate Story” —————————————————————
+with st.sidebar:
+    st.header("🛠 Story Settings")
+    name          = st.text_input("Character name", value="Ani")
+    age           = st.selectbox("Age range", ["3-5", "6-8", "9-11"])
+    theme         = st.selectbox(
+        "Theme",
+        ["Adventure", "Bedtime", "Fairy Tale", "Fantasy", "Mystery", "Outer Space", "Spooky", "Comedy"]
+    )
+    story_prompt  = st.text_area("Story prompt")
+    custom_detail = st.text_area("Special detail")
+    if st.button("✍️ Generate Story"):
+        with st.spinner("Writing your story..."):
+            try:
+                st.session_state["story"] = generate_story(
+                    name, age, theme, custom_detail, story_prompt
+                )
+            except Exception as e:
+                st.error(f"Story generation failed: {e}")
 
-# Generate story
-if st.button("Generate Story"):
-    with st.spinner("Writing your story..."):
-        story = generate_story(name, age, theme, custom_detail, story_prompt)
-        st.session_state["story"] = story
-        st.session_state["voice"] = select_voice(theme, age)
+# ——— Tabs for Story / Image / Narration ——————————————————————
+tab1, tab2, tab3 = st.tabs(["📖 Story", "🖼 Illustration", "🎧 Narration"])
 
-# ✅ Simple story display (persists after rerun)
-if "story" in st.session_state:
-    st.text_area("Your Story", st.session_state["story"], height=350)
+# — Story Tab ——————————————————————————————————————————
+with tab1:
+    if "story" in st.session_state:
+        st.markdown(f"### {name}'s {theme} Story")
+        st.write(st.session_state["story"])
+    else:
+        st.info("Generate a story from the sidebar to get started.")
 
-    # Generate and display image
-    if st.button("🖼️ Generate Illustration"):
-        with st.spinner("Drawing your story..."):
-            image_prompt = f"A whimsical illustration of {name} in a {theme} story for children"
-            image_url = generate_image(image_prompt)
-            st.image(image_url, caption="AI-generated illustration", use_container_width=True)
+# — Illustration Tab ————————————————————————————————————
+with tab2:
+    if "story" in st.session_state:
+        if st.button("🖼️ Generate Illustration", key="illustrate"):
+            with st.spinner("Drawing your story..."):
+                try:
+                    img_prompt = f"A whimsical illustration of {name} in a {theme} children's story"
+                    url = generate_image(img_prompt)
+                    st.image(url, caption="AI-generated illustration", use_container_width=True)
+                except Exception as e:
+                    st.error(f"Image generation failed: {e}")
+    else:
+        st.info("First generate a story, then come here for an illustration.")
 
-# Generate narration
-if "story" in st.session_state and st.button("🎧 Generate Narration"):
-    with st.spinner("Narrating your story..."):
+# — Narration Tab ——————————————————————————————————————
+with tab3:
+    if "story" in st.session_state:
         filename = f"{name.lower()}_{theme.lower().replace(' ', '_')}.mp3"
-        narrate_story(st.session_state["story"], filename, st.session_state["voice"])
-        with open(filename, "rb") as f:
-            st.download_button("Download Narrated Story", f, file_name=filename, mime="audio/mpeg")
+        if st.button("🎧 Generate Narration", key="narrate"):
+            with st.spinner("Narrating…"):
+                try:
+                    voice_id = select_voice(theme, age)
+                    narrate_story(st.session_state["story"], filename, voice_id)
+                except Exception as e:
+                    st.error(f"Narration failed: {e}")
+        if os.path.exists(filename):
+            audio_bytes = open(filename, "rb").read()
+            st.audio(audio_bytes, format="audio/mp3")
+            st.download_button(
+                "Download MP3", audio_bytes, file_name=filename, mime="audio/mpeg"
+            )
+    else:
+        st.info("Your story audio will appear here after generation.")

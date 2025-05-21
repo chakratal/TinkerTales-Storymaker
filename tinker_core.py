@@ -53,24 +53,24 @@ style_by_theme = {
     "Comedy": """Write in the voice of a chaotic and funny narrator, like Roald Dahl mixed with Dav Pilkey...""",
     "Fairy Tale": """Write in a whimsical, old-timey voice, like Julia Donaldson meets a friendly storyteller from long ago...""",
     "Fantasy": """Write in a strange, curious voice, like early J.K. Rowling meets Lewis Carroll...""",
-    "Mystery": """
-    Write in a playful, clever voice like Lemony Snicket or Gordon Korman. Use dry humor, dramatic exaggeration, and occasional asides to the reader.
+    "Mystery": """Write in a clever, fast-paced voice like Lemony Snicket or Gordon Korman. Let the narrator be dryly funny, slightly exasperated, and full of commentary.
 
-    The story must revolve around a real mystery (not a prank), with strange suspects and absurd clues that seem useless at first but make sense later.
+    Center the story on a real mystery (not a prank), with weird suspects and absurd clues that seem useless at first but make sense later.
 
-    Avoid repeating the main character's name too much. Use pronouns, reactions, and inner thoughts to vary the sentence structure and keep things engaging.
+    Side characters should be strange and suspicious: think a rhyming janitor, a furious pigeon, or a librarian with a grudge. Avoid bland resolutions—aim for a twist that’s silly, dramatic, or hilariously surprising.
 
-    Side characters should be odd, dramatic, or over-the-top. Think: someone who talks only in rhyme, a librarian who refuses to whisper, or a pigeon with a vendetta. Let them feel chaotic, suspicious, or weird — never generic.
-
-    Make sure the twist isn't a quiet confession. Aim for something funny, dramatic, or ridiculous. It should feel surprising but consistent with the clues dropped earlier.
-
-    The narrator should have a voice — let them make snarky comments, express disbelief, or joke with the reader. The story should feel like a mash-up of Snicket's mystery absurdism and Korman's fast, funny pacing.
-
-    Finish with a satisfying or hilarious resolution and a final wink to the reader.
-    """,
+    The narrator should guide us with snark and disbelief, making the mystery feel absurd, exciting, and full of charm.""",
     "Outer Space": """Write with giddy excitement, like a space-obsessed kid telling you about their alien best friend...""",
     "Science Fiction": """Write like a madcap inventor crossed with a sarcastic robot...""",
-    "Spooky": """Write in a playful spooky voice, like a camp counselor telling a ghost story..."""
+    "Spooky": """
+    Write in a darkly playful voice, like Lemony Snicket crossed with Edward Gorey. The narrator should be dramatic, slightly grim, and not afraid to break the fourth wall to offer warnings, opinions, or unhelpful commentary.
+
+    Use absurd but oddly logical twists — such as haunted teaspoons, ghostly librarians with overdue grudges, or invisible foghorns that only play polka music. Characters should behave in hilariously doomed or melodramatic ways, and they should never simply explain things when they can overcomplicate them.
+
+    Embrace deadpan humor, hyper-specific phobias, and strange metaphors. The story should sound like it’s being told by a slightly exasperated narrator who doesn’t fully trust the reader to survive the tale.
+
+    End with a wonderfully odd twist, a grim but silly punchline, or an unresolved mystery. Above all, make it weird, theatrical, and deliciously spooky—but not actually scary.
+    """
 }
 
 # === Age-based guidance ===
@@ -111,7 +111,7 @@ The story should include:
 - A creative, fun title
 - A clear beginning, middle, and end
 - At least one surprising twist or unexpected character
-- Around 500–550 words
+- Around 500-550 words
 """
 
     response = openai.ChatCompletion.create(
@@ -121,7 +121,9 @@ The story should include:
         max_tokens=1000
     )
 
-    story_text = response["choices"][0]["message"]["content"]
+    story_text = response["choices"][0]["message"]["content"].strip()
+    if story_text.endswith("The End.") or story_text.endswith("The End"):
+        story_text = story_text.rsplit("The End", 1)[0].strip()
     return story_text.replace("Title:", "").strip()
 
 # === Image generator ===

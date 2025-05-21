@@ -5,23 +5,36 @@ import os
 from PIL import Image
 from tinker_core import generate_story, generate_image, select_voice, narrate_story
 
-# ——— Page config & CSS ———————————————————————————————
+# ——— Page config & CSS —————————————————————————————————
 st.set_page_config(page_title="TinkerTales Storymaker", page_icon="✨")
 st.markdown(
     """
     <style>
-    .reportview-container { background-color: #fdfdfd; }
-    h1, h2, h3 { font-family: 'Comic Sans MS', cursive; }
+      .reportview-container { background-color: #fdfdfd; }
+      h1, h2, h3 { font-family: 'Comic Sans MS', cursive; }
+
+      /* 📖 Storybook styling */
+      .storybook {
+        background: url("assets/page-bg.png") no-repeat center;
+        background-size: contain;
+        padding: 2rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-family: "Times New Roman", serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: auto;
+      }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# ——— Load secrets —————————————————————————————————————
+# ——— Load secrets ——————————————————————————————————————
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 set_api_key(st.secrets["ELEVEN_API_KEY"])
 
-# ——— Header & Logo ——————————————————————————————————————
+# ——— Header & Logo —————————————————————————————————————
 st.title("📖✨ TinkerTales Storymaker")
 st.caption("Where imagination meets AI and comes to life.")
 st.markdown("&nbsp;", unsafe_allow_html=True)
@@ -30,7 +43,7 @@ st.image(logo, use_container_width=True)
 st.markdown("&nbsp;", unsafe_allow_html=True)
 st.markdown("### ✏️ Watch Your Brainstorm Come to Life!")
 
-# ——— Sidebar: Inputs & “Generate Story” —————————————————————
+# ——— Sidebar: Inputs & “Generate Story” ————————————————————
 with st.sidebar:
     st.header("🛠 Story Settings")
     name          = st.text_input("Character name", value="Ani")
@@ -50,14 +63,19 @@ with st.sidebar:
             except Exception as e:
                 st.error(f"Story generation failed: {e}")
 
-# ——— Tabs for Story / Image / Narration ——————————————————————
+# ——— Tabs for Story / Illustration / Narration ——————————————
 tab1, tab2, tab3 = st.tabs(["📖 Story", "🖼 Illustration", "🎧 Narration"])
 
 # — Story Tab ——————————————————————————————————————————
 with tab1:
     if "story" in st.session_state:
         st.markdown(f"### {name}'s {theme} Story")
-        st.write(st.session_state["story"])
+        html = (
+            '<div class="storybook">'
+            + st.session_state["story"].replace("\n", "<br><br>")
+            + "</div>"
+        )
+        st.markdown(html, unsafe_allow_html=True)
     else:
         st.info("Generate a story from the sidebar to get started.")
 

@@ -53,9 +53,8 @@ style_by_theme = {
     "Comedy": """Write in the voice of a chaotic and funny narrator, like Roald Dahl mixed with Dav Pilkey...""",
     "Fairy Tale": """Write in a whimsical, old-timey voice, like Julia Donaldson meets a friendly storyteller from long ago...""",
     "Fantasy": """Write in a strange, curious voice, like early J.K. Rowling meets Lewis Carroll...""",
-    "Mystery": """Write in a clever, fast-paced voice like Lemony Snicket with a narrator who is dryly funny, slightly exasperated, and full of absurd, 
-    exciting, charming commentary. The story must center on a real mystery (not a prank), with odd suspects and clues that seem useless until a silly or 
-    dramatic twist explains them. End with a big reveal or ridiculous confession that ties everything together — make it feel like a mystery was truly solved.""",
+    "Mystery": """Write like Lemony Snicket with a fast pace and dry humor. There must be a real mystery (not a prank) with odd clues and strange suspects. 
+    End with a clever or ridiculous twist that actually solves the case.""",
     "Outer Space": """Write with giddy excitement, like a space-obsessed kid telling you about their alien best friend...""",
     "Science Fiction": """Write like a madcap inventor crossed with a sarcastic robot...""",
     "Spooky": """Write in a darkly playful voice, like Edward Gorey. The narrator should be dramatic,  grim, slightly unhelpful, and offer absurd twists. 

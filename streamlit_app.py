@@ -48,10 +48,44 @@ if st.button("Generate Story"):
         story = generate_story(name, age, theme, custom_detail, story_prompt)
         st.session_state["story"] = story
         st.session_state["voice"] = select_voice(theme, age)
+        st.session_state["current_page"] = 0
 
 # ✅ Always show the story if it exists (even after rerun)
-if "story" in st.session_state:
-    st.text_area("Your Story", st.session_state["story"], height=350)
+# --- Flipbook-style story viewer ---
+import textwrap
+
+story = st.session_state.get("story", "")
+WORDS_PER_PAGE = 90
+
+words = story.split()
+pages = [" ".join(words[i:i + WORDS_PER_PAGE]) for i in range(0, len(words), WORDS_PER_PAGE)]
+total_pages = len(pages)
+
+if "current_page" not in st.session_state:
+    st.session_state.current_page = 0
+
+# Navigation
+col1, col2, col3 = st.columns([1, 2, 1])
+with col1:
+    if st.button("⬅️ Previous", disabled=st.session_state.current_page == 0):
+        st.session_state.current_page -= 1
+with col3:
+    if st.button("Next ➡️", disabled=st.session_state.current_page >= total_pages - 1):
+        st.session_state.current_page += 1
+
+# Page indicator
+st.markdown(f"**Page {st.session_state.current_page + 1} of {total_pages}**")
+
+# Storybook-style layout
+st.markdown(
+    f"""
+    <div style='border: 2px solid #ddd; padding: 2rem; border-radius: 12px; background-color: #fff8f0; 
+                box-shadow: 2px 2px 8px rgba(0,0,0,0.1); min-height: 300px; font-family: "Georgia", serif;'>
+    {textwrap.fill(pages[st.session_state.current_page], width=80)}
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
     # Generate and display image
     if st.button("🖼️ Generate Illustration"):

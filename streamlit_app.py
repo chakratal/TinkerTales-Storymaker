@@ -21,13 +21,11 @@ st.markdown(
     <style>
       /* 📖 Open-book two-page spread */
       .storybook {
-        background: url("/blankbook.png") no-repeat center top;
-        background-size: contain;
-        padding: 4rem 3rem;
+        margin: 1rem 0;
+        padding: 1rem;
         font-family: "Times New Roman", serif;
-        line-height: 1.4;
-        max-width: 1000px;
-        margin: auto;
+        line-height: 1.6;
+        /* remove margin:auto and background */
       }
       .storybook p {
         margin: 0.5rem 0;

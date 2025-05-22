@@ -68,7 +68,7 @@ with st.sidebar:
                 st.error(f"Story generation failed: {e}")
 
 # ——— Tabs for Story / Illustration / Narration ——————————————
-st.markdown("**➡️ Swipe or click the tabs above to see your Illustration and Narration!**")
+st.markdown("**➡️ Click the tabs below to see your story's illustration or hear its narration**")
 tab1, tab2, tab3 = st.tabs(["📖 Story", "🖼 Illustration", "🎧 Narration"])
 
 # — Story Tab ——————————————————————————————————————————

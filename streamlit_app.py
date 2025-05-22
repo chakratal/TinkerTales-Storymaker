@@ -10,20 +10,24 @@ st.set_page_config(page_title="TinkerTales Storymaker", page_icon="✨")
 st.markdown(
     """
     <style>
-      .reportview-container { background-color: #fdfdfd; }
-      h1, h2, h3 { font-family: 'Comic Sans MS', cursive; }
-
-      /* 📖 Storybook styling */
+      /* 📖 Open-book two-page spread */
       .storybook {
-        background: url("assets/page-bg.png") no-repeat center;
+        background: url("assets/blankbook.png") no-repeat center top;
         background-size: contain;
-        padding: 2rem;
-        border: 1px solid #ccc;
-        border-radius: 8px;
+        padding: 4rem 3rem;        /* give text room inside page margins */
         font-family: "Times New Roman", serif;
-        line-height: 1.6;
-        max-width: 800px;
+        line-height: 1.4;          /* tighten up a bit */
+        max-width: 1000px;
         margin: auto;
+      }
+
+      /* tighten paragraph spacing on the blank pages */
+      .storybook p {
+        margin: 0.5rem 0;
+      }
+
+      h1, h2, h3 {
+        font-family: 'Comic Sans MS', cursive;
       }
     </style>
     """,
@@ -46,13 +50,13 @@ st.markdown("### ✏️ Watch Your Brainstorm Come to Life!")
 # ——— Sidebar: Inputs & “Generate Story” ————————————————————
 with st.sidebar:
     st.header("🛠 Story Settings")
-    name          = st.text_input("Character name", value="Ani")
-    age           = st.selectbox("Age range", ["3-5", "6-8", "9-11"])
-    theme         = st.selectbox(
+    name = st.text_input("Character name", value="Ani")
+    age = st.selectbox("Age range", ["3-5", "6-8", "9-11"])
+    theme = st.selectbox(
         "Theme",
         ["Adventure", "Bedtime", "Fairy Tale", "Fantasy", "Mystery", "Outer Space", "Spooky", "Comedy"]
     )
-    story_prompt  = st.text_area("Story prompt")
+    story_prompt = st.text_area("Story prompt")
     custom_detail = st.text_area("Special detail")
     if st.button("✍️ Generate Story"):
         with st.spinner("Writing your story..."):
@@ -64,18 +68,19 @@ with st.sidebar:
                 st.error(f"Story generation failed: {e}")
 
 # ——— Tabs for Story / Illustration / Narration ——————————————
+st.markdown("**➡️ Swipe or click the tabs above to see your Illustration and Narration!**")
 tab1, tab2, tab3 = st.tabs(["📖 Story", "🖼 Illustration", "🎧 Narration"])
 
 # — Story Tab ——————————————————————————————————————————
 with tab1:
     if "story" in st.session_state:
         st.markdown(f"### {name}'s {theme} Story")
-        html = (
-            '<div class="storybook">'
-            + st.session_state["story"].replace("\n", "<br><br>")
-            + "</div>"
-        )
-        st.markdown(html, unsafe_allow_html=True)
+        # Render each paragraph on the book pages
+        story_html = "<div class='storybook'>"
+        for para in st.session_state["story"].split("\n\n"):
+            story_html += f"<p>{para}</p>"
+        story_html += "</div>"
+        st.markdown(story_html, unsafe_allow_html=True)
     else:
         st.info("Generate a story from the sidebar to get started.")
 

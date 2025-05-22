@@ -1,9 +1,18 @@
+import os
+from dotenv import load_dotenv
+
+# ✅ Load your .env into os.environ
+load_dotenv()
+
 import streamlit as st
 import openai
 from elevenlabs import set_api_key
-import os
 from PIL import Image
 from tinker_core import generate_story, generate_image, select_voice, narrate_story
+
+# ✅ Pull API keys from the environment
+openai.api_key   = os.getenv("OPENAI_API_KEY")
+set_api_key(os.getenv("ELEVEN_API_KEY"))
 
 # ——— Page config & CSS —————————————————————————————————
 st.set_page_config(page_title="TinkerTales Storymaker", page_icon="✨")
@@ -12,21 +21,17 @@ st.markdown(
     <style>
       /* 📖 Open-book two-page spread */
       .storybook {
-        background: url("/assets/blankbook.png") no-repeat center top;
+        background: url("/blankbook.png") no-repeat center top;
         background-size: contain;
-        padding: 4rem 3rem;        /* text sits nicely within page margins */
+        padding: 4rem 3rem;
         font-family: "Times New Roman", serif;
-        line-height: 1.4;          /* tighter spacing */
+        line-height: 1.4;
         max-width: 1000px;
         margin: auto;
       }
-
-      /* tighten paragraph spacing on the blank pages */
       .storybook p {
         margin: 0.5rem 0;
       }
-
-      /* Tab headers and titles in playful cursive */
       h1, h2, h3 {
         font-family: 'Comic Sans MS', cursive;
       }
@@ -34,10 +39,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-# ——— Load secrets ——————————————————————————————————————
-openai.api_key = st.secrets["OPENAI_API_KEY"]
-set_api_key(st.secrets["ELEVEN_API_KEY"])
 
 # ——— Header & Logo —————————————————————————————————————
 st.title("📖✨ TinkerTales Storymaker")

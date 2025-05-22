@@ -12,11 +12,11 @@ st.markdown(
     <style>
       /* 📖 Open-book two-page spread */
       .storybook {
-        background: url("assets/blankbook.png") no-repeat center top;
+        background: url("/assets/blankbook.png") no-repeat center top;
         background-size: contain;
-        padding: 4rem 3rem;        /* give text room inside page margins */
+        padding: 4rem 3rem;        /* text sits nicely within page margins */
         font-family: "Times New Roman", serif;
-        line-height: 1.4;          /* tighten up a bit */
+        line-height: 1.4;          /* tighter spacing */
         max-width: 1000px;
         margin: auto;
       }
@@ -26,6 +26,7 @@ st.markdown(
         margin: 0.5rem 0;
       }
 
+      /* Tab headers and titles in playful cursive */
       h1, h2, h3 {
         font-family: 'Comic Sans MS', cursive;
       }
@@ -68,14 +69,13 @@ with st.sidebar:
                 st.error(f"Story generation failed: {e}")
 
 # ——— Tabs for Story / Illustration / Narration ——————————————
-st.markdown("**➡️ Click the tabs below for an illustration or narration**")
+st.markdown("**➡️ Click the tabs below to view your Illustration and Narration!**")
 tab1, tab2, tab3 = st.tabs(["📖 Story", "🖼 Illustration", "🎧 Narration"])
 
 # — Story Tab ——————————————————————————————————————————
 with tab1:
     if "story" in st.session_state:
         st.markdown(f"### {name}'s {theme} Story")
-        # Render each paragraph on the book pages
         story_html = "<div class='storybook'>"
         for para in st.session_state["story"].split("\n\n"):
             story_html += f"<p>{para}</p>"
@@ -112,8 +112,6 @@ with tab3:
         if os.path.exists(filename):
             audio_bytes = open(filename, "rb").read()
             st.audio(audio_bytes, format="audio/mp3")
-            st.download_button(
-                "Download MP3", audio_bytes, file_name=filename, mime="audio/mpeg"
-            )
+            st.download_button("Download MP3", audio_bytes, file_name=filename, mime="audio/mpeg")
     else:
         st.info("Your story audio will appear here after generation.")

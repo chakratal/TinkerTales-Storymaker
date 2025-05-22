@@ -74,11 +74,15 @@ tab1, tab2, tab3 = st.tabs(["📖 Story", "🖼 Illustration", "🎧 Narration"]
 # — Story Tab ——————————————————————————————————————————
 with tab1:
     if "story" in st.session_state:
-        st.markdown(f"### {name}'s {theme} Story")
-        story_html = "<div class='storybook'>"
+        # Build one HTML blob with heading + paragraphs
+        story_html = f"""
+          <div class='storybook'>
+            <h2>{name}'s {theme} Story</h2>
+        """
         for para in st.session_state["story"].split("\n\n"):
             story_html += f"<p>{para}</p>"
         story_html += "</div>"
+
         st.markdown(story_html, unsafe_allow_html=True)
     else:
         st.info("Generate a story from the sidebar to get started.")

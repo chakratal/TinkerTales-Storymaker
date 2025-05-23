@@ -74,17 +74,17 @@ tab1, tab2, tab3 = st.tabs(["📖 Story", "🖼 Illustration", "🎧 Narration"]
 # — Story Tab ——————————————————————————————————————————
 with tab1:
     if "story" in st.session_state:
-        # 1. Split off the true story title (first line)
+        # Pull out the first line as the title, and the rest as body
         full_story = st.session_state["story"].strip()
-        lines = full_story.split("\n")
-        title = lines[0]
-        body = "\n".join(lines[1:]).strip()
+        lines      = full_story.split("\n", 1)
+        title      = lines[0]
+        body       = lines[1] if len(lines) > 1 else ""
 
-        # 2. Render the real title as a big heading
-        st.markdown(f"# {title}")
-
-        # 3. Wrap the rest of the paragraphs in your .storybook container
-        story_html = "<div class='storybook'>"
+        # Build a single HTML block with the heading inside .storybook
+        story_html = f"""
+          <div class='storybook'>
+            <h1 style="margin-top:0;">{title}</h1>
+        """
         for para in body.split("\n\n"):
             story_html += f"<p>{para}</p>"
         story_html += "</div>"

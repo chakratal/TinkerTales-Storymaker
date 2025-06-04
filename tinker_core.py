@@ -81,7 +81,10 @@ def generate_story(character_name, age_range, theme, custom_detail=None, story_p
     story_text = response["choices"][0]["message"]["content"].strip()
     if story_text.endswith("The End.") or story_text.endswith("The End"):
         story_text = story_text.rsplit("The End", 1)[0].strip()
-    return story_text.replace("Title:", "").strip()
+    cleaned_story = story_text.replace("Title:", "").strip()
+    lines = cleaned_story.split("\n", 1)
+    title = lines[0].strip()
+    return title, cleaned_story
 
 # === Image generator ===
 def generate_image(prompt):

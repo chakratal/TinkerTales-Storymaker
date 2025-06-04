@@ -1,31 +1,31 @@
 import os
+import re
 from dotenv import load_dotenv
-
-# ✅ Load your .env into os.environ
-load_dotenv()
-
 import streamlit as st
 import openai
 from elevenlabs import set_api_key
 from PIL import Image
+from datetime import datetime
 from tinker_core import generate_story, generate_image, select_voice, narrate_story
 
-# ✅ Pull API keys from the environment
-openai.api_key   = os.getenv("OPENAI_API_KEY")
+# ——— Utility ———————————————————————————————————————
+def slugify(text):
+    return re.sub(r'[^a-z0-9]+', '-', text.lower()).strip('-')
+
+# ——— Load environment variables ——————————————————————
+load_dotenv()
+openai.api_key = os.getenv("OPENAI_API_KEY")
 set_api_key(os.getenv("ELEVEN_API_KEY"))
 
 # ——— Page config & CSS —————————————————————————————————
 st.set_page_config(page_title="TinkerTales Storymaker", page_icon="✨")
-st.markdown(
-    """
+st.markdown("""
     <style>
-      /* 📖 Open-book two-page spread */
       .storybook {
         margin: 1rem 0;
         padding: 1rem;
         font-family: "Times New Roman", serif;
         line-height: 1.6;
-        /* remove margin:auto and background */
       }
       .storybook p {
         margin: 0.5rem 0;
@@ -34,53 +34,60 @@ st.markdown(
         font-family: 'Comic Sans MS', cursive;
       }
     </style>
-    """,
-    unsafe_allow_html=True
-)
+""", unsafe_allow_html=True)
 
 # ——— Header & Logo —————————————————————————————————————
 st.title("📖✨ TinkerTales Storymaker")
 st.caption("Where imagination meets AI and comes to life.")
 st.markdown("&nbsp;", unsafe_allow_html=True)
-logo = Image.open("assets/logo.png")
-st.image(logo, use_container_width=True)
+st.image(Image.open("assets/logo.png"), use_container_width=True)
 st.markdown("&nbsp;", unsafe_allow_html=True)
 st.markdown("### ✏️ Watch Your Brainstorm Come to Life!")
 
-# ——— Sidebar: Inputs & “Generate Story” ————————————————————
+# ——— Sidebar Inputs ————————————————————————————————————
 with st.sidebar:
     st.header("🛠 Story Settings")
     name = st.text_input("Character name", value="Ani")
     age = st.selectbox("Age range", ["3-5", "6-8", "9-11"])
-    theme = st.selectbox(
-        "Theme",
-        ["Adventure", "Bedtime", "Fairy Tale", "Fantasy", "Mystery", "Outer Space", "Spooky"]
-    )
+    theme = st.selectbox("Theme", ["Adventure", "Bedtime", "Fairy Tale", "Fantasy", "Mystery", "Outer Space", "Spooky"])
     story_prompt = st.text_area("Story prompt")
     custom_detail = st.text_area("Special detail")
-    if st.button("✍️ Generate Story"):
-        with st.spinner("Writing your story..."):
-            try:
-                st.session_state["story"] = generate_story(
-                    name, age, theme, custom_detail, story_prompt
-                )
-            except Exception as e:
-                st.error(f"Story generation failed: {e}")
 
-# ——— Tabs for Story / Illustration / Narration ——————————————
+# ——— Main Tabs ————————————————————————————————————————
 st.markdown("**➡️ Click the tabs below to view your Illustration and Narration!**")
-tab1, tab2, tab3 = st.tabs(["📖 Story", "🖼 Illustration", "🎧 Narration"])
+tab1, tab2, tab3, tab4 = st.tabs(["📖 Story", "🖼 Illustration", "🎧 Narration", "📚 Library"])
 
-# — Story Tab ——————————————————————————————————————————
+# ——— Story Generation ———————————————————————————————
+if st.sidebar.button("✍️ Generate Story"):
+    with st.spinner("Writing your story..."):
+        try:
+            title, full_story = generate_story(name, age, theme, custom_detail, story_prompt)
+            st.session_state["story"] = full_story
+            st.session_state["title"] = title
+
+            # ✅ Save to story library
+            if "library" not in st.session_state:
+                st.session_state["library"] = []
+            st.session_state["library"].insert(0, {
+                "title": title,
+                "story": full_story,
+                "theme": theme,
+                "age": age,
+                "character": name
+            })
+            st.session_state["library"] = st.session_state["library"][:10]
+
+        except Exception as e:
+            st.error(f"Story generation failed: {e}")
+
+# ——— Tab 1: Story —————————————————————————————————————————
 with tab1:
     if "story" in st.session_state:
-        # Pull out the first line as the title, and the rest as body
         full_story = st.session_state["story"].strip()
-        lines      = full_story.split("\n", 1)
-        title      = lines[0]
-        body       = lines[1] if len(lines) > 1 else ""
+        lines = full_story.split("\n", 1)
+        title = lines[0]
+        body = lines[1] if len(lines) > 1 else ""
 
-        # Build a single HTML block with the heading inside .storybook
         story_html = f"""
           <div class='storybook'>
             <h1 style="margin-top:0;">{title}</h1>
@@ -93,7 +100,7 @@ with tab1:
     else:
         st.info("Generate a story from the sidebar to get started.")
 
-# — Illustration Tab ————————————————————————————————————
+# ——— Tab 2: Illustration ———————————————————————————————
 with tab2:
     if "story" in st.session_state:
         if st.button("🖼️ Generate Illustration", key="illustrate"):
@@ -107,20 +114,35 @@ with tab2:
     else:
         st.info("First generate a story, then come here for an illustration.")
 
-# — Narration Tab ——————————————————————————————————————
+# ——— Tab 3: Narration ———————————————————————————————————
 with tab3:
     if "story" in st.session_state:
-        filename = f"{name.lower()}_{theme.lower().replace(' ', '_')}.mp3"
         if st.button("🎧 Generate Narration", key="narrate"):
             with st.spinner("Narrating…"):
                 try:
+                    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+                    story_title = slugify(st.session_state.get("title", "story"))
+                    filename = f"{name.lower()}_{theme.lower().replace(' ', '_')}_{story_title}_{timestamp}.mp3"
                     voice_id = select_voice(theme, age)
                     narrate_story(st.session_state["story"], filename, voice_id)
+                    st.session_state["audio_filename"] = filename
                 except Exception as e:
                     st.error(f"Narration failed: {e}")
-        if os.path.exists(filename):
-            audio_bytes = open(filename, "rb").read()
+
+        if "audio_filename" in st.session_state and os.path.exists(st.session_state["audio_filename"]):
+            audio_bytes = open(st.session_state["audio_filename"], "rb").read()
             st.audio(audio_bytes, format="audio/mp3")
-            st.download_button("Download MP3", audio_bytes, file_name=filename, mime="audio/mpeg")
+            st.download_button("Download MP3", audio_bytes, file_name=st.session_state["audio_filename"], mime="audio/mpeg")
     else:
         st.info("Your story audio will appear here after generation.")
+
+# ——— Tab 4: Library —————————————————————————————————————
+with tab4:
+    st.subheader("📚 Story Library")
+    if "library" in st.session_state and st.session_state["library"]:
+        for idx, entry in enumerate(st.session_state["library"]):
+            with st.expander(f"{entry['title']} — {entry['character']} ({entry['theme']}, age {entry['age']})", expanded=(idx == 0)):
+                for para in entry["story"].split("\n\n"):
+                    st.markdown(f"<p style='margin:0 0 0.5rem 0;'>{para}</p>", unsafe_allow_html=True)
+    else:
+        st.info("Your recent stories will appear here after you generate them.")

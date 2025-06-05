@@ -2,18 +2,15 @@ import openai
 from elevenlabs import generate, set_api_key, VoiceSettings
 from dotenv import load_dotenv
 import os
-# After your imports in tinker_core.py
 from config import STYLE_BY_THEME, VOICE_IDS
 from functools import lru_cache
+from textwrap import dedent
 
 @lru_cache(maxsize=None)
 def select_voice(theme: str, age_range: str) -> str:
-    # For Comedy, use theme–age combos; otherwise just theme
     key = f"{theme}-{age_range}" if theme == "Comedy" else theme
-    # Fall back to "Bedtime" voice if we don’t find a match
     return VOICE_IDS.get(key, VOICE_IDS["Bedtime"])
 
-# Load .env locally or rely on Streamlit secrets in the app
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 set_api_key(os.getenv("ELEVEN_API_KEY"))
@@ -29,7 +26,6 @@ def narrate_story(story_text, filename="story.mp3", voice_id="EXAVITQu4vr4xnSDxM
         f.write(audio)
     print(f"🎧 Narration saved as {filename}")
 
-# === Age-based guidance ===
 def get_age_style(age_range):
     style_by_age = {
         "3-5": "Use simple vocabulary, short sentences, and lots of repetition...",
@@ -38,14 +34,8 @@ def get_age_style(age_range):
     }
     return style_by_age.get(age_range, "")
 
-# === story generator ===
-from textwrap import dedent
-
 def generate_story(character_name, age_range, theme, custom_detail=None, story_prompt=None):
-    # pull style directly from your JSON-backed dict
     theme_style = STYLE_BY_THEME.get(theme, "")
-
-    # your existing age logic stays the same
     age_style = get_age_style(age_range)
 
     prompt = dedent(f"""
@@ -69,7 +59,7 @@ def generate_story(character_name, age_range, theme, custom_detail=None, story_p
     - A clear beginning, middle, and end
     - At least one surprising twist or unexpected character
     - Around 500-550 words
-""")
+    """)
 
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -86,7 +76,6 @@ def generate_story(character_name, age_range, theme, custom_detail=None, story_p
     title = lines[0].strip()
     return title, cleaned_story
 
-# === Image generator ===
 def generate_image(prompt):
     response = openai.Image.create(
         model="dall-e-3",
@@ -99,21 +88,12 @@ def generate_image(prompt):
 
 def summarize_for_image(story_text):
     """
-    Extract the most visual scene for DALL·E prompt.
-    Looks for a vivid paragraph or a line that sparks imagery.
+    Use the first 700 characters, trimmed to avoid splitting mid-sentence.
     """
-    paragraphs = story_text.split("\n\n")
-    visual_paragraphs = sorted(
-        paragraphs,
-        key=lambda p: sum(word in p.lower() for word in ["glow", "castle", "creature", "forest", "moon", "storm", "butterfly", "spaceship", "magic", "ghost", "dragon"]),
-        reverse=True
-    )
-    return visual_paragraphs[0].strip() if visual_paragraphs else story_text[:700]
+    trimmed = story_text.strip().replace("\n", " ")
+    return trimmed[:700].rsplit(".", 1)[0] + "."
 
 def generate_image_from_story(story_text):
-    """
-    Uses a vivid summary of the story to create a more accurate image prompt.
-    """
     description = summarize_for_image(story_text)
     prompt = f"Children's book illustration in watercolor style. No text. Show: {description}"
     return generate_image(prompt)

@@ -6,8 +6,14 @@ import openai
 from elevenlabs import set_api_key
 from PIL import Image
 from datetime import datetime
-from tinker_core import generate_story, generate_image, select_voice, narrate_story
-from tinker_core import summarize_for_image
+from tinker_core import (
+    generate_story,
+    generate_image,
+    generate_image_from_story,
+    summarize_for_image,
+    select_voice,
+    narrate_story,
+)
 
 # ——— Utility ———————————————————————————————————————
 def slugify(text):
@@ -105,7 +111,7 @@ with tab1:
 with tab2:
     if "story" in st.session_state:
         story_text = st.session_state["story"]
-        display_caption = "AI-generated illustration (based on the story)"
+        display_caption = st.session_state.get("title")
 
         if st.button("🖼️ Generate Illustration", key="illustrate"):
             with st.spinner("Drawing your story..."):

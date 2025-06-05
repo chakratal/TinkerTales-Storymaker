@@ -95,14 +95,14 @@ def summarize_for_image(story_text):
 
 def generate_image_from_story(name, theme, custom_detail=None, story_prompt=None):
     prompt_parts = [
-        "Children's illustration in a dreamy, whimsical style. No labels or writing. Do not include letters or text of any kind. Focus on color, texture, and emotion, and imaginative details.",
+        "Children's illustration in a dreamy, whimsical style. No labels or writing. Focus on color, texture, and emotion, and imaginative details.",
         f"Theme: {theme}.",
         f"Main character: {name}."
     ]
     if custom_detail:
-        prompt_parts.append(f"Include artistic elements that echo: {custom_detail}.")
+        prompt_parts.append(f"Visual atmosphere includes: {custom_detail}.")
     if story_prompt:
-        prompt_parts.append(f"Visually interpret the mood and atmosphere of: {story_prompt}.")
+        prompt_parts.append(f"Scene inspired by: {story_prompt}.")
 
     prompt = " ".join(prompt_parts)
     return generate_image(prompt)

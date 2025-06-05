@@ -56,7 +56,7 @@ with st.sidebar:
     st.header("🛠 Story Settings")
     name = st.text_input("Character name", value="Ani")
     age = st.selectbox("Age range", ["3-5", "6-8", "9-11"])
-    theme = st.selectbox("Theme", ["Adventure", "Bedtime", "Fairy Tale", "Fantasy", "Mystery", "Outer Space"])
+    theme = st.selectbox("Theme", ["Adventure", "Bedtime", "Fairy Tale", "Fantasy", "Mystery", "Outer Space", "Spooky"])
     story_prompt = st.text_area("Story prompt")
     custom_detail = st.text_area("Special detail")
 

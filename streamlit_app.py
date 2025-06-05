@@ -7,6 +7,7 @@ from elevenlabs import set_api_key
 from PIL import Image
 from datetime import datetime
 from tinker_core import generate_story, generate_image, select_voice, narrate_story
+from tinker_core import summarize_for_image
 
 # ——— Utility ———————————————————————————————————————
 def slugify(text):
@@ -123,7 +124,7 @@ with tab2:
             st.button("🔁 Regenerate Illustration", key="regenerate")
 
     else:
-        st.info("First generate a story, then come here for a custom illustration.")
+        st.info("Come here after you generate a story to create a custom illustration.")
 
 # ——— Tab 3: Narration ———————————————————————————————————
 with tab3:
@@ -145,7 +146,7 @@ with tab3:
             st.audio(audio_bytes, format="audio/mp3")
             st.download_button("Download MP3", audio_bytes, file_name=st.session_state["audio_filename"], mime="audio/mpeg")
     else:
-        st.info("Your story audio will appear here after your story generates.")
+        st.info("Your story audio will appear after your story generates.")
 
 # ——— Tab 4: Library —————————————————————————————————————
 with tab4:
@@ -158,4 +159,4 @@ with tab4:
                 for para in entry["story"].split("\n\n"):
                     st.markdown(f"<p style='margin:0 0 0.5rem 0;'>{para}</p>", unsafe_allow_html=True)
     else:
-        st.info("Your recent stories will appear here after you create them.")
+        st.info("Your library will get bigger and bigger with each story you write.")

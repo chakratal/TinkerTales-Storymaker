@@ -95,7 +95,7 @@ def summarize_for_image(story_text):
 
 def generate_image_from_story(name, theme, custom_detail=None, story_prompt=None):
     prompt_parts = [
-        "Children's book illustration, vibrant and imaginative.",
+        "Children's book illustration, vibrant and imaginative. Do not include any words, letters, signs, or visible writing.",
         f"Theme: {theme}.",
         f"Main character: {name}."
     ]

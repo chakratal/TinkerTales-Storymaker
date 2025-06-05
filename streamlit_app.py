@@ -98,21 +98,32 @@ with tab1:
 
         st.markdown(story_html, unsafe_allow_html=True)
     else:
-        st.info("Generate a story from the sidebar to get started.")
+        st.info("Add details to the sidebar on the left to generate a story.")
 
 # ——— Tab 2: Illustration ———————————————————————————————
 with tab2:
     if "story" in st.session_state:
+        story_text = st.session_state["story"]
+        summary_prompt = summarize_for_image(story_text)
+        display_caption = "AI-generated illustration (based on the story)"
+
         if st.button("🖼️ Generate Illustration", key="illustrate"):
             with st.spinner("Drawing your story..."):
                 try:
-                    img_prompt = f"A whimsical illustration of {name} in a {theme} children's story"
-                    url = generate_image(img_prompt)
-                    st.image(url, caption="AI-generated illustration", use_container_width=True)
+                    prompt = f"Children's book illustration in watercolor style. No text. Capture this moment: {summary_prompt}"
+                    url = generate_image(prompt)
+                    st.session_state["illustration"] = url
+                    if st.session_state.get("library"):
+                        st.session_state["library"][0]["illustration"] = url
                 except Exception as e:
                     st.error(f"Image generation failed: {e}")
+
+        if "illustration" in st.session_state:
+            st.image(st.session_state["illustration"], caption=display_caption, use_container_width=True)
+            st.button("🔁 Regenerate Illustration", key="regenerate")
+
     else:
-        st.info("First generate a story, then come here for an illustration.")
+        st.info("First generate a story, then come here for a custom illustration.")
 
 # ——— Tab 3: Narration ———————————————————————————————————
 with tab3:
@@ -134,7 +145,7 @@ with tab3:
             st.audio(audio_bytes, format="audio/mp3")
             st.download_button("Download MP3", audio_bytes, file_name=st.session_state["audio_filename"], mime="audio/mpeg")
     else:
-        st.info("Your story audio will appear here after generation.")
+        st.info("Your story audio will appear here after your story generates.")
 
 # ——— Tab 4: Library —————————————————————————————————————
 with tab4:
@@ -142,7 +153,9 @@ with tab4:
     if "library" in st.session_state and st.session_state["library"]:
         for idx, entry in enumerate(st.session_state["library"]):
             with st.expander(f"{entry['title']} — {entry['character']} ({entry['theme']}, age {entry['age']})", expanded=(idx == 0)):
+                if "illustration" in entry:
+                    st.image(entry["illustration"], caption="Illustration", width=300)
                 for para in entry["story"].split("\n\n"):
                     st.markdown(f"<p style='margin:0 0 0.5rem 0;'>{para}</p>", unsafe_allow_html=True)
     else:
-        st.info("Your recent stories will appear here after you generate them.")
+        st.info("Your recent stories will appear here after you create them.")

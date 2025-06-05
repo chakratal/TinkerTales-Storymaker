@@ -96,3 +96,16 @@ def generate_image(prompt):
         response_format="url"
     )
     return response["data"][0]["url"]
+
+def summarize_for_image(story_text):
+    """
+    Extract the most visual scene for DALL·E prompt.
+    Looks for a vivid paragraph or a line that sparks imagery.
+    """
+    paragraphs = story_text.split("\n\n")
+    visual_paragraphs = sorted(
+        paragraphs,
+        key=lambda p: sum(word in p.lower() for word in ["glow", "castle", "creature", "forest", "moon", "storm", "butterfly", "spaceship", "magic", "ghost", "dragon"]),
+        reverse=True
+    )
+    return visual_paragraphs[0].strip() if visual_paragraphs else story_text[:700]

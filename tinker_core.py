@@ -100,7 +100,7 @@ def generate_image_from_story(name, theme, custom_detail=None, story_prompt=None
         f"Main character: {name}."
     ]
     if custom_detail:
-        prompt_parts.append(f"Include: {custom_detail}.")
+        prompt_parts.append(f"Show elements like: {custom_detail}.")
     if story_prompt:
         prompt_parts.append(f"Inspired by this scene: {story_prompt}.")
 

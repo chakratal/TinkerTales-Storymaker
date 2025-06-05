@@ -93,7 +93,16 @@ def summarize_for_image(story_text):
     trimmed = story_text.strip().replace("\n", " ")
     return trimmed[:700].rsplit(".", 1)[0] + "."
 
-def generate_image_from_story(story_text):
-    description = summarize_for_image(story_text)
-    prompt = f"Children's book illustration in watercolor style. No text. Show: {description}"
+def generate_image_from_story(name, theme, custom_detail=None, story_prompt=None):
+    prompt_parts = [
+        f"Children's book illustration in watercolor style. No text.",
+        f"Theme: {theme}.",
+        f"Main character: {name}."
+    ]
+    if custom_detail:
+        prompt_parts.append(f"Include: {custom_detail}.")
+    if story_prompt:
+        prompt_parts.append(f"Based on this prompt: {story_prompt}.")
+
+    prompt = " ".join(prompt_parts)
     return generate_image(prompt)

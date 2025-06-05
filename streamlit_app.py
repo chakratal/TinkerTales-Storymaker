@@ -117,7 +117,7 @@ with tab2:
             with st.spinner("Drawing your story..."):
                 try:
                     from tinker_core import generate_image_from_story  # Make sure this is imported!
-                    url = generate_image_from_story(story_text)
+                    url = generate_image_from_story(name, theme, custom_detail, story_prompt)
                     st.session_state["illustration"] = url
                     if st.session_state.get("library"):
                         st.session_state["library"][0]["illustration"] = url

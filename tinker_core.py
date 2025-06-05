@@ -109,3 +109,11 @@ def summarize_for_image(story_text):
         reverse=True
     )
     return visual_paragraphs[0].strip() if visual_paragraphs else story_text[:700]
+
+def generate_image_from_story(story_text):
+    """
+    Uses a vivid summary of the story to create a more accurate image prompt.
+    """
+    description = summarize_for_image(story_text)
+    prompt = f"Children's book illustration in watercolor style. No text. Show: {description}"
+    return generate_image(prompt)

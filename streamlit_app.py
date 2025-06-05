@@ -105,14 +105,13 @@ with tab1:
 with tab2:
     if "story" in st.session_state:
         story_text = st.session_state["story"]
-        summary_prompt = summarize_for_image(story_text)
         display_caption = "AI-generated illustration (based on the story)"
 
         if st.button("🖼️ Generate Illustration", key="illustrate"):
             with st.spinner("Drawing your story..."):
                 try:
-                    prompt = f"Children's book illustration in watercolor style. No text. Capture this moment: {summary_prompt}"
-                    url = generate_image(prompt)
+                    from tinker_core import generate_image_from_story  # Make sure this is imported!
+                    url = generate_image_from_story(story_text)
                     st.session_state["illustration"] = url
                     if st.session_state.get("library"):
                         st.session_state["library"][0]["illustration"] = url

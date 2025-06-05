@@ -103,7 +103,7 @@ def generate_image_from_story(name, theme, custom_detail=None, story_prompt=None
         prompt_parts.append(f"Include: {custom_detail}.")
     if story_prompt:
         prompt_parts.append(f"Inspired by this scene: {story_prompt}.")
-        prompt_parts.append("Do not include any writing or symbols in the image.")
+        prompt_parts.append("Do not include any writing or symbols in the image. Exclude all typographic elements. Do not draw any shapes resembling characters or letters. Avoid letterforms, handwriting, or signage of any kind.")
 
     prompt = " ".join(prompt_parts)
     return generate_image(prompt)

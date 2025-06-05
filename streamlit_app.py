@@ -61,7 +61,7 @@ with st.sidebar:
     custom_detail = st.text_area("Special detail")
 
 # ——— Main Tabs ————————————————————————————————————————
-st.markdown("**➡️ Click the tabs below to view your Illustration and Narration!**")
+st.markdown("**⬇️ Click the tabs below**")
 tab1, tab2, tab3, tab4 = st.tabs(["📖 Story", "🖼 Illustration", "🎧 Narration", "📚 Library"])
 
 # ——— Story Generation ———————————————————————————————

@@ -12,7 +12,7 @@ VOICE_IDS = {
     "Fairy Tale":         "ZF6FPAbjXT4488VcRRnw",
     "Fantasy":            "j9jfwdrw7BRfcR43Qohk",
     "Mystery":            "NFG5qt843uXKj4pFvR7C",
-    "Outer Space":        "XrExE9yKIg1WjnnlVkGX",
+    "Outer Space":        "onwK4e9ZLuTAKqWW03F9",
     "Science Fiction":    "IKne3meq5aSn9XLyUdCD",
     "Spooky":             "onwK4e9ZLuTAKqWW03F9",
 }

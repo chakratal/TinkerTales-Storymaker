@@ -4,8 +4,8 @@ from pathlib import Path
 
 # Voice IDs for each theme/age combo
 VOICE_IDS = {
-    "Adventure":          "9BWtsMINqrJLrRacOk9x",
-    "Bedtime":            "EXAVITQu4vr4xnSDxMaL",
+    "Adventure":          "JBFqnCBsd6RMkjVDRZzb",
+    "Bedtime":            "XB0fDUnXU5powFXDhCwa",
     "Comedy-3-5":         "pFZP5JQG7iQjIQuC4Bku",
     "Comedy-6-8":         "cgSgspJ2msm6clMCkdW9",
     "Comedy-9-11":        "j9jfwdrw7BRfcR43Qohk",

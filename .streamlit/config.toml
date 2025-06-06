@@ -1,7 +1,7 @@
 [theme]
 base = "dark"
-primaryColor = "#00bfa6"  # Teal
-backgroundColor = "#0E1117"
-secondaryBackgroundColor = "#262730"
-textColor = "#FAFAFA"
+primaryColor = "#BEB7A4"  # Khaki
+backgroundColor = "#0E1117" # Rich black
+secondaryBackgroundColor = "#262730" # Raisin black
+textColor = "#FFFFFC" # Baby powder
 font = "sans serif"

@@ -40,45 +40,6 @@ st.markdown("""
       h1, h2, h3 {
         font-family: 'Comic Sans MS', cursive;
       }
-
-      /* ✅ Accent color */
-      :root {
-        --accent-color: #006157;
-      }
-
-      /* ✅ Tabs */
-      [data-testid="stMarkdownContainer"] .stTabs [aria-selected="true"] {
-        color: var(--accent-color);
-        border-bottom: 3px solid var(--accent-color);
-      }
-
-      /* ✅ Button styling */
-      .stButton>button {
-        background-color: var(--accent-color) !important;
-        color: white !important;
-        border: none !important;
-        border-radius: 5px;
-        padding: 0.4rem 0.8rem;
-      }
-
-      .stButton>button:hover {
-        background-color: #006157 !important;
-        color: white !important;
-      }
-
-      /* 🚫 Remove harsh outlines (restore default feel) */
-      .stTextInput>div>div>input,
-      .stTextArea>div>textarea,
-      .stSelectbox>div>div>div {
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .stTextInput>div>div>input:focus,
-      .stTextArea>div>textarea:focus,
-      .stSelectbox>div>div>div:focus {
-        border: 1px solid #aaa;
-        outline: none !important;
-      }
     </style>
 """, unsafe_allow_html=True)
 

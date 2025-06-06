@@ -28,10 +28,11 @@ set_api_key(os.getenv("ELEVEN_API_KEY"))
 st.set_page_config(page_title="TinkerTales Storymaker", page_icon="✨")
 st.markdown("""
     <style>
-        /* ✅ Increase tab label size */
-        div[data-testid="stTabs"] button {
-            font-size: 1.1rem;
-            font-weight: 600;
+        /* Make tab labels larger and bolder */
+        div[data-baseweb="tab"] {
+            font-size: 1.1rem !important;
+            font-weight: 600 !important;
+            padding: 0.5rem 1rem !important;
         }
 
         .storybook {

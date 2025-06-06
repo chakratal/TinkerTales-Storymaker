@@ -28,11 +28,10 @@ set_api_key(os.getenv("ELEVEN_API_KEY"))
 st.set_page_config(page_title="TinkerTales Storymaker", page_icon="✨")
 st.markdown("""
     <style>
-        /* ✅ Make Streamlit tab labels bigger */
-        div[role="tab"] > div {
-            font-size: 1.2rem;
+        /* ✅ Increase tab label size */
+        div[data-testid="stTabs"] button {
+            font-size: 1.1rem;
             font-weight: 600;
-            padding: 0.5rem 1rem;
         }
 
         .storybook {

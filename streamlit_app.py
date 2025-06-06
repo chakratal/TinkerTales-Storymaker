@@ -40,6 +40,16 @@ st.markdown("""
       h1, h2, h3 {
         font-family: 'Comic Sans MS', cursive;
       }
+            /* 🔧 Override red outlines and button color */
+        .css-1cpxqw2, .css-1x8cf1d, .stButton>button {
+        border-color: #00bfa6 !important;
+        color: #00bfa6 !important;
+        }
+
+        .stButton>button:hover {
+        background-color: #00bfa6 !important;
+        color: white !important;
+        }
 
       /* ✨ Change active tab color */
       [data-testid="stMarkdownContainer"] .stTabs [aria-selected="true"] {
@@ -48,6 +58,7 @@ st.markdown("""
       }
     </style>
 """, unsafe_allow_html=True)
+
 
 # ——— Header & Logo —————————————————————————————————————
 st.title("📖✨ TinkerTales Storymaker")

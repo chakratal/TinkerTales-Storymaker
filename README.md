@@ -9,7 +9,7 @@
 ## 🚀 Features
 
 - 🧒 Age-appropriate storytelling (3–5, 6–8, 9–11)
-- 🎭 Themed story generation (Fantasy, Comedy, Spooky, etc.)
+- 🎭 Themed story generation (Adventure, Bedtime, Fantasy, etc.)
 - 🧠 AI-written using GPT-3.5 Turbo
 - 🎤 Voice narration via ElevenLabs
 - 🎨 Illustrated scenes via DALL·E
@@ -19,11 +19,15 @@
 
 ## 🛠 Installation
 
-1. Clone the repository:
+Clone the repository and install dependencies:
 
 ```bash
 git clone https://github.com/chakratal/TinkerTales-Storymaker.git
 cd TinkerTales-Storymaker
 
-# Install system dependencies
-brew install tesseract
+# (Optional) Create and activate a virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install required Python packages
+pip install -r requirements.txt

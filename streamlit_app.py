@@ -159,7 +159,7 @@ with tab4:
         for idx, entry in enumerate(st.session_state["library"]):
             with st.expander(f"{entry['title']} — {entry['character']} ({entry['theme']}, age {entry['age']})", expanded=(idx == 0)):
                 if "illustration" in entry:
-                    st.image(entry["illustration"], caption="Illustration", width=300)
+                    st.image(entry["illustration"], width=300)
                 for para in entry["story"].split("\n\n"):
                     st.markdown(f"<p style='margin:0 0 0.5rem 0;'>{para}</p>", unsafe_allow_html=True)
     else:

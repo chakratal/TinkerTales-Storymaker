@@ -178,3 +178,10 @@ narrated_stories/
 
 # TinkerTales dev scripts
 list_voices.py
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# OS-generated files
+.DS_Store
+Thumbs.db

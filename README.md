@@ -24,3 +24,6 @@
 ```bash
 git clone https://github.com/chakratal/TinkerTales-Storymaker.git
 cd TinkerTales-Storymaker
+
+# Install system dependencies
+brew install tesseract

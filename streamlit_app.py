@@ -126,7 +126,6 @@ with tab2:
 
         if "illustration" in st.session_state:
             st.image(st.session_state["illustration"], caption=display_caption, use_container_width=True)
-            st.button("🔁 Regenerate Illustration", key="regenerate")
 
     else:
         st.info("Come here after you generate a story to create a custom illustration.")

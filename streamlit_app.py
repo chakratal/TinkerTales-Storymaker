@@ -41,18 +41,18 @@ st.markdown("""
         font-family: 'Comic Sans MS', cursive;
       }
 
-      /* ✅ Darker Teal Theme */
+      /* ✅ Accent color */
       :root {
-        --accent-color: #009688;
+        --accent-color: #006157;
       }
 
-      /* 🟢 Active tab underline + text */
+      /* ✅ Tabs */
       [data-testid="stMarkdownContainer"] .stTabs [aria-selected="true"] {
         color: var(--accent-color);
         border-bottom: 3px solid var(--accent-color);
       }
 
-      /* 🟢 Button styling */
+      /* ✅ Button styling */
       .stButton>button {
         background-color: var(--accent-color) !important;
         color: white !important;
@@ -60,23 +60,23 @@ st.markdown("""
         border-radius: 5px;
         padding: 0.4rem 0.8rem;
       }
+
       .stButton>button:hover {
-        background-color: #00796b !important;
+        background-color: #006157 !important;
         color: white !important;
       }
 
-      /* 🟢 Outline inputs (like selectboxes, text areas) */
+      /* 🚫 Remove harsh outlines (restore default feel) */
       .stTextInput>div>div>input,
       .stTextArea>div>textarea,
       .stSelectbox>div>div>div {
-        border: 1px solid var(--accent-color) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1);
       }
 
-      /* 🟢 Focused outline color */
       .stTextInput>div>div>input:focus,
       .stTextArea>div>textarea:focus,
       .stSelectbox>div>div>div:focus {
-        border-color: #00796b !important;
+        border: 1px solid #aaa;
         outline: none !important;
       }
     </style>

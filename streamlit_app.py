@@ -40,6 +40,12 @@ st.markdown("""
       h1, h2, h3 {
         font-family: 'Comic Sans MS', cursive;
       }
+
+      /* ✨ Change active tab color */
+      [data-testid="stMarkdownContainer"] .stTabs [aria-selected="true"] {
+        color: #00bfa6;
+        border-bottom: 3px solid #00bfa6;
+      }
     </style>
 """, unsafe_allow_html=True)
 

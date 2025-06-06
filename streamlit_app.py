@@ -28,18 +28,26 @@ set_api_key(os.getenv("ELEVEN_API_KEY"))
 st.set_page_config(page_title="TinkerTales Storymaker", page_icon="✨")
 st.markdown("""
     <style>
-      .storybook {
-        margin: 1rem 0;
-        padding: 1rem;
-        font-family: "Times New Roman", serif;
-        line-height: 1.6;
-      }
-      .storybook p {
-        margin: 0.5rem 0;
-      }
-      h1, h2, h3 {
-        font-family: 'Comic Sans MS', cursive;
-      }
+        /* Make tab text bigger */
+        .stTabs [data-baseweb="tab"] {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .storybook {
+            margin: 1rem 0;
+            padding: 1rem;
+            font-family: "Times New Roman", serif;
+            line-height: 1.6;
+        }
+
+        .storybook p {
+            margin: 0.5rem 0;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Comic Sans MS', cursive;
+        }
     </style>
 """, unsafe_allow_html=True)
 

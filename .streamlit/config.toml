@@ -1,6 +1,6 @@
 [theme]
 base = "dark"
-primaryColor = "#BEB7A4"  # Khaki
+primaryColor = "#7293A0"  # Air Force blue
 backgroundColor = "#0E1117" # Rich black
 secondaryBackgroundColor = "#262730" # Raisin black
 textColor = "#FFFFFC" # Baby powder

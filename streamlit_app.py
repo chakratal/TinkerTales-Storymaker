@@ -40,25 +40,47 @@ st.markdown("""
       h1, h2, h3 {
         font-family: 'Comic Sans MS', cursive;
       }
-            /* 🔧 Override red outlines and button color */
-        .css-1cpxqw2, .css-1x8cf1d, .stButton>button {
-        border-color: #00bfa6 !important;
-        color: #00bfa6 !important;
-        }
 
-        .stButton>button:hover {
-        background-color: #00bfa6 !important;
-        color: white !important;
-        }
+      /* ✅ Darker Teal Theme */
+      :root {
+        --accent-color: #009688;
+      }
 
-      /* ✨ Change active tab color */
+      /* 🟢 Active tab underline + text */
       [data-testid="stMarkdownContainer"] .stTabs [aria-selected="true"] {
-        color: #00bfa6;
-        border-bottom: 3px solid #00bfa6;
+        color: var(--accent-color);
+        border-bottom: 3px solid var(--accent-color);
+      }
+
+      /* 🟢 Button styling */
+      .stButton>button {
+        background-color: var(--accent-color) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 5px;
+        padding: 0.4rem 0.8rem;
+      }
+      .stButton>button:hover {
+        background-color: #00796b !important;
+        color: white !important;
+      }
+
+      /* 🟢 Outline inputs (like selectboxes, text areas) */
+      .stTextInput>div>div>input,
+      .stTextArea>div>textarea,
+      .stSelectbox>div>div>div {
+        border: 1px solid var(--accent-color) !important;
+      }
+
+      /* 🟢 Focused outline color */
+      .stTextInput>div>div>input:focus,
+      .stTextArea>div>textarea:focus,
+      .stSelectbox>div>div>div:focus {
+        border-color: #00796b !important;
+        outline: none !important;
       }
     </style>
 """, unsafe_allow_html=True)
-
 
 # ——— Header & Logo —————————————————————————————————————
 st.title("📖✨ TinkerTales Storymaker")

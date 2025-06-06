@@ -6,10 +6,7 @@ from config import STYLE_BY_THEME, VOICE_IDS
 from functools import lru_cache
 from textwrap import dedent
 from PIL import Image
-import pytesseract
 import streamlit as st
-import requests
-import time
 
 @lru_cache(maxsize=None)
 def select_voice(theme: str, age_range: str) -> str:
@@ -98,11 +95,6 @@ def summarize_for_image(story_text):
     trimmed = story_text.strip().replace("\n", " ")
     return trimmed[:700].rsplit(".", 1)[0] + "."
 
-def contains_text(image_url):
-    image = Image.open(requests.get(image_url, stream=True).raw)
-    text = pytesseract.image_to_string(image)
-    return bool(text.strip())
-
 def generate_image_from_story(name, theme, custom_detail=None, story_prompt=None):
     prompt_parts = [
         "A single moment from a children's story, illustrated in a dreamy, whimsical style. Focus on color, texture, and emotion. Avoid text or writing of any kind.",
@@ -115,12 +107,4 @@ def generate_image_from_story(name, theme, custom_detail=None, story_prompt=None
         prompt_parts.append(f"The scene is inspired by: {story_prompt}. Show only imagery.")
 
     prompt = " ".join(prompt_parts).strip()
-
-    for attempt in range(3):
-        image_url = generate_image(prompt)
-        if not contains_text(image_url):
-            return image_url
-        time.sleep(0.3)
-        st.warning(f"⚠️ Attempt {attempt+1}: Text detected in image. Regenerating...")
-    st.warning("📣 I'm feeling a little wordy at the moment. Please excuse the creative flair in your image.")
-    return image_url
+    return generate_image(prompt)

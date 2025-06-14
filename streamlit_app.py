@@ -139,7 +139,13 @@ with tab1:
 
                     if st.button("✔️ Use This Version"):
                         st.session_state["story"] = revised_story
-                        st.success("Your story has been updated!")
+
+                        # ✅ Also update the top entry in the library, if it exists
+                        if "library" in st.session_state and st.session_state["library"]:
+                            st.session_state["library"][0]["story"] = revised_story
+
+                        st.success("Story updated! Refreshing view...")
+                        st.experimental_rerun()
                 except Exception as e:
                     st.error(f"Could not revise the story: {e}")
 

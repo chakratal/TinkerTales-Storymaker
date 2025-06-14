@@ -106,6 +106,43 @@ with tab1:
         story_html += "</div>"
 
         st.markdown(story_html, unsafe_allow_html=True)
+
+        # ——— Fix Something Section ———————————————————————
+        st.markdown("---")
+        st.markdown("### 🛠️ Want to Fix Something?")
+        st.caption("Type a change you'd like to make to the story. For example:")
+        st.markdown("> - “Indra is a boy.”\n> - “Ani is pronounced Ah-nee.”\n> - “Make it more magical.”")
+
+        revision_instruction = st.text_input("✏️ Describe your fix or revision:")
+
+        if st.button("🔄 Apply Fix"):
+            with st.spinner("Updating story…"):
+                try:
+                    # Compose revision prompt
+                    system_msg = "You're a helpful assistant that revises children's stories based on user input."
+                    user_prompt = f"Original story:\n\n{full_story}\n\nUser wants this change:\n{revision_instruction}\n\nPlease return the full revised story."
+                    
+                    response = openai.ChatCompletion.create(
+                        model="gpt-4",
+                        messages=[
+                            {"role": "system", "content": system_msg},
+                            {"role": "user", "content": user_prompt}
+                        ],
+                        temperature=0.7
+                    )
+
+                    revised_story = response.choices[0].message.content.strip()
+                    st.session_state["revised_story"] = revised_story
+
+                    st.markdown("### ✨ Revised Story")
+                    st.text_area("📝 Edited Version", revised_story, height=400)
+
+                    if st.button("✔️ Use This Version"):
+                        st.session_state["story"] = revised_story
+                        st.success("Your story has been updated!")
+                except Exception as e:
+                    st.error(f"Could not revise the story: {e}")
+
     else:
         st.info("Add details to the sidebar on the left to generate a story.")
 

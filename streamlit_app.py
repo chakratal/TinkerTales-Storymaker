@@ -113,7 +113,8 @@ with tab1:
         st.caption("Type a change you'd like to make to the story. For example:")
         st.markdown("> - “Indra is a boy.”\n> - “Ani is pronounced Ah-nee.”\n> - “Make it more magical.”")
 
-        revision_instruction = st.text_input("✏️ Describe your fix or revision:")
+        revision_instruction = st.text_input("✏️ Describe your fix or revision:", key="revision_instruction")
+
 
         if st.button("🔄 Apply Fix"):
             with st.spinner("Updating story…"):
@@ -140,9 +141,16 @@ with tab1:
                     if st.button("✔️ Use This Version"):
                         st.session_state["story"] = revised_story
 
-                        # ✅ Also update the top entry in the library, if it exists
+                        # ✅ Update the top entry in the library, if it exists
                         if "library" in st.session_state and st.session_state["library"]:
                             st.session_state["library"][0]["story"] = revised_story
+
+                        # 🧹 Clear the revised_story so the rerender doesn’t confuse the session state
+                        if "revised_story" in st.session_state:
+                            del st.session_state["revised_story"]
+                        
+                        # (Optional) Reset the revision instruction input box
+                        st.session_state["revision_instruction"] = ""
 
                         st.success("Story updated! Refreshing view...")
                         st.experimental_rerun()
